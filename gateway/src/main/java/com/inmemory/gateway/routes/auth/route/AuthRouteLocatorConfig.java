@@ -1,4 +1,4 @@
-package com.inmemory.gateway.routes;
+package com.inmemory.gateway.routes.auth.route;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -12,14 +12,13 @@ public class AuthRouteLocatorConfig {
 
     @Bean
     public RouteLocator authRoutes(RouteLocatorBuilder builder) {
-        builder.routes()
+        return builder.routes()
                 .route(
-                        route -> route.path("/auth/**")
+                        r -> r.path("/auth/**")
                                 .and()
                                 .uri("http://localhost:8081")
                 )
+                .build()
         ;
-
-        return builder.routes().build();
     }
 }
