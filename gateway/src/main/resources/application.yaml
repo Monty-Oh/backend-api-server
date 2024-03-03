@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: local # default profile
+    group:
+      local:
+        - common
+      unit-test:
+        - common
+      develop:
+        - common
+
+---
+# 공통
+spring:
+  config:
+    activate:
+      on-profile: common
+server:
+  port: 3000
