@@ -1,22 +1,34 @@
 package com.inmemory.gateway.routes.auth.route;
 
+import com.inmemory.gateway.routes.auth.filter.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static com.inmemory.gateway.routes.auth.constants.AuthApiUrl.*;
+
 @Slf4j
 @Configuration
+@RequiredArgsConstructor
 public class AuthRouteLocatorConfig {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public RouteLocator authRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(
-                        r -> r.path("/auth/**")
-                                .and()
-                                .uri("http://localhost:8081")
+                        r -> r.path(REQUEST_LOGIN_URI)
+                                .uri(MAPPING_REQUEST_LOGIN_URI)
+                )
+                .route(
+                        r -> r.path(REQUEST_ALL_URI)
+                                .filters(
+                                        f -> f.filter(jwtAuthenticationFilter.apply(new JwtAuthenticationFilter.Config()))
+                                )
+                                .uri(MAPPING_REQUEST_ALL_URI)
                 )
                 .build()
         ;
