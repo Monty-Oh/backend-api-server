@@ -1,6 +1,7 @@
 package com.inmemory.gateway.common.handler;
 
 import com.inmemory.gateway.common.exception.ApplicationException;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +21,8 @@ import static com.inmemory.gateway.common.constants.StaticValue.HEADER_RESPONSE_
 public class GlobalExceptionHandler implements WebExceptionHandler {
 
     @Override
-    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
+    @NonNull
+    public Mono<Void> handle(ServerWebExchange exchange, @NonNull Throwable ex) {
         ServerHttpResponse serverHttpResponse = exchange.getResponse();
         HttpHeaders serverHttpResponseHeaders = serverHttpResponse.getHeaders();
 
