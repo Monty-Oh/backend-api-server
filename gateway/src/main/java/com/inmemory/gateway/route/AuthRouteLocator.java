@@ -1,6 +1,6 @@
-package com.inmemory.gateway.routes.auth.route;
+package com.inmemory.gateway.route;
 
-import com.inmemory.gateway.routes.auth.filter.JwtAuthenticationFilter;
+import com.inmemory.gateway.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -8,12 +8,12 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.inmemory.gateway.routes.auth.constants.AuthApiUrl.*;
+import static com.inmemory.gateway.constants.AuthApiUrl.*;
 
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class AuthRouteLocatorConfig {
+public class AuthRouteLocator {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**

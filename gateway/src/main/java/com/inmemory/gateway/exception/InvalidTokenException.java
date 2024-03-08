@@ -1,6 +1,6 @@
-package com.inmemory.gateway.common.exception;
+package com.inmemory.gateway.exception;
 
-import com.inmemory.gateway.common.constants.ErrorCode;
+import com.inmemory.gateway.constants.ErrorCode;
 import lombok.Getter;
 
 /**

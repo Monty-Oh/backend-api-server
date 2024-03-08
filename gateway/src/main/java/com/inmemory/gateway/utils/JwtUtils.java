@@ -1,7 +1,7 @@
 package com.inmemory.gateway.utils;
 
-import com.inmemory.gateway.common.exception.ApplicationException;
-import com.inmemory.gateway.common.exception.InvalidTokenException;
+import com.inmemory.gateway.exception.ApplicationException;
+import com.inmemory.gateway.exception.InvalidTokenException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 
-import static com.inmemory.gateway.common.constants.ErrorCode.*;
+import static com.inmemory.gateway.constants.ErrorCode.*;
 
 @Slf4j
 @Component

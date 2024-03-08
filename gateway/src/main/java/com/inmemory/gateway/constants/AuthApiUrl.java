@@ -1,4 +1,4 @@
-package com.inmemory.gateway.routes.auth.constants;
+package com.inmemory.gateway.constants;
 
 public class AuthApiUrl {
 
