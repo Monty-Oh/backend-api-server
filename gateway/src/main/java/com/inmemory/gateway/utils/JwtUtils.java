@@ -1,5 +1,7 @@
 package com.inmemory.gateway.utils;
 
+import com.inmemory.gateway.common.exception.ApplicationException;
+import com.inmemory.gateway.common.exception.InvalidTokenException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+
+import static com.inmemory.gateway.common.constants.ErrorCode.*;
 
 @Slf4j
 @Component
@@ -25,25 +29,22 @@ public class JwtUtils {
     /**
      * 전달 받은 토큰을 가지고 검증한다.
      *
-     * @param accessToken   로그인 토큰
+     * @param token 전달 받은 토큰
      */
-    public void validateToken(String accessToken) {
+    public void validateToken(String token) {
         try {
             Jwts.parser()
                     .verifyWith(jwtSecretKey)
                     .build()
-                    .parseSignedClaims(accessToken)
+                    .parseSignedClaims(token)
                     .getPayload()
                     .getExpiration();
         } catch (ExpiredJwtException exception) {
-            log.info("인증서 만료 메시지");
-            throw exception;
+            throw new InvalidTokenException(TOKEN_EXPIRED_ERROR);
         } catch (SignatureException | MalformedJwtException exception) {
-            log.info("인증서 형식 오류 메시지");
-            throw exception;
+            throw new InvalidTokenException(TOKEN_STATUS_ERROR);
         } catch (Exception exception) {
-            log.info("알 수 없는 에러");
-            throw exception;
+            throw new ApplicationException(INTERNAL_SERVER_ERROR);
         }
     }
 }

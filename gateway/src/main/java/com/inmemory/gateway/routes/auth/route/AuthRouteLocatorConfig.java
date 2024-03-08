@@ -16,6 +16,12 @@ import static com.inmemory.gateway.routes.auth.constants.AuthApiUrl.*;
 public class AuthRouteLocatorConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     * 인증 관련 요청 라우터
+     *
+     * @param builder RouteLocatorBuilder
+     * @return RouteLocator
+     */
     @Bean
     public RouteLocator authRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -31,6 +37,6 @@ public class AuthRouteLocatorConfig {
                                 .uri(MAPPING_REQUEST_ALL_URI)
                 )
                 .build()
-        ;
+                ;
     }
 }
