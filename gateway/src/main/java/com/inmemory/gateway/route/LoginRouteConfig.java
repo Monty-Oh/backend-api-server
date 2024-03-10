@@ -1,6 +1,7 @@
 package com.inmemory.gateway.route;
 
 import com.inmemory.gateway.filter.JwtAuthenticationFilter;
+import com.inmemory.gateway.filter.LogFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -13,11 +14,12 @@ import static com.inmemory.gateway.constants.AuthApiUrl.*;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class AuthRouteLocator {
+public class LoginRouteConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final LogFilter logFilter;
 
     /**
-     * 인증 관련 요청 라우터
+     * 로그인 요청 API 대응 라우터
      *
      * @param builder RouteLocatorBuilder
      * @return RouteLocator
@@ -27,14 +29,11 @@ public class AuthRouteLocator {
         return builder.routes()
                 .route(
                         r -> r.path(REQUEST_LOGIN_URI)
-                                .uri(MAPPING_REQUEST_LOGIN_URI)
-                )
-                .route(
-                        r -> r.path(REQUEST_ALL_URI)
                                 .filters(
-                                        f -> f.filter(jwtAuthenticationFilter.apply(new JwtAuthenticationFilter.Config()))
+                                        f -> f.filter(logFilter.apply(new LogFilter.Config()))
+                                                .rewritePath(REQUEST_LOGIN_URI, MAPPING_LOGIN_URI)
                                 )
-                                .uri(MAPPING_REQUEST_ALL_URI)
+                                .uri("http://localhost:8081")
                 )
                 .build()
                 ;
