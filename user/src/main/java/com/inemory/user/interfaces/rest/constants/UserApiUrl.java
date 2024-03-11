@@ -7,4 +7,7 @@ public class UserApiUrl {
 
     //  Base URL with versioning
     public static final String USER_V1_BASE_URL = "/user/v1";
+
+    //  로그인
+    public static final String LOGIN_URL = "/users/login";
 }

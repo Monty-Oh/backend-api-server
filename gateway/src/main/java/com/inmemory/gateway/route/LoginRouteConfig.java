@@ -9,7 +9,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.inmemory.gateway.constants.AuthApiUrl.*;
+import static com.inmemory.gateway.constants.ApiUrl.*;
 
 @Slf4j
 @Configuration
@@ -31,9 +31,9 @@ public class LoginRouteConfig {
                         r -> r.path(REQUEST_LOGIN_URI)
                                 .filters(
                                         f -> f.filter(logFilter.apply(new LogFilter.Config()))
-                                                .rewritePath(REQUEST_LOGIN_URI, MAPPING_LOGIN_URI)
+                                                .rewritePath(REQUEST_LOGIN_URI, MAPPING_BASE_USER_URL + MAPPING_LOGIN_URI)
                                 )
-                                .uri("http://localhost:8081")
+                                .uri(MAPPING_USER_URL)
                 )
                 .build()
                 ;

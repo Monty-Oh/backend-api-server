@@ -1,6 +1,6 @@
 package com.inemory.user.domain.repository;
 
-import com.inemory.user.domain.aggregate.User;
+import com.inemory.user.domain.model.aggregate.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.inemory.user.domain.aggregate;
+package com.inemory.user.domain.model.aggregate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,4 +22,6 @@ public class User {
     private String userNo;
 
     private String loginId;
+
+    private String password;
 }
