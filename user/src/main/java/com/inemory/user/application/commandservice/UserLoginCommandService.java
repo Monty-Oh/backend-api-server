@@ -15,8 +15,8 @@ public class UserLoginCommandService {
      * 로그인 애플리케이션 서비스
      * 비밀번호를 검증하고, 토큰 발급 요청을 한다.
      *
-     * @param userLoginCommand
-     * @return
+     * @param userLoginCommand 로그인 요청 Command
+     * @return 발급된 토큰 값
      */
     public Object login(UserLoginCommand userLoginCommand) {
         userVerifyPasswordService.verifyPassword(userLoginCommand.getLoginId(), userLoginCommand.getPassword());

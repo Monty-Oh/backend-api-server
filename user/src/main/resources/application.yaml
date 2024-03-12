@@ -40,6 +40,9 @@ spring:
     validate-migration-naming: true
 server:
   port: 8083
+feign:
+  api:
+    auth-url: http://localhost:8081/
 
 ---
 # unit-test 용 Spring Profile
