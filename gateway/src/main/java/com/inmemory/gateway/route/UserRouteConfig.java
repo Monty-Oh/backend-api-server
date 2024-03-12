@@ -1,6 +1,5 @@
 package com.inmemory.gateway.route;
 
-import com.inmemory.gateway.filter.JwtAuthenticationFilter;
 import com.inmemory.gateway.filter.LogFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +13,8 @@ import static com.inmemory.gateway.constants.ApiUrl.*;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class LoginRouteConfig {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+public class UserRouteConfig {
+//    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final LogFilter logFilter;
 
     /**
@@ -25,15 +24,14 @@ public class LoginRouteConfig {
      * @return RouteLocator
      */
     @Bean
-    public RouteLocator authRoutes(RouteLocatorBuilder builder) {
+    public RouteLocator userRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(
-                        r -> r.path(REQUEST_LOGIN_URI)
-                                .filters(
-                                        f -> f.filter(logFilter.apply(new LogFilter.Config()))
-                                                .rewritePath(REQUEST_LOGIN_URI, MAPPING_BASE_USER_URL + MAPPING_LOGIN_URI)
-                                )
-                                .uri(MAPPING_USER_URL)
+                .route(USER_LOGIN_ROUTE_ID, r -> r.path(REQUEST_LOGIN_URI)
+                        .filters(
+                                f -> f.filter(logFilter.apply(new LogFilter.Config()))
+                                        .rewritePath(REQUEST_LOGIN_URI, MAPPING_BASE_USER_URL + MAPPING_LOGIN_URI)
+                        )
+                        .uri(MAPPING_USER_URL)
                 )
                 .build()
                 ;
