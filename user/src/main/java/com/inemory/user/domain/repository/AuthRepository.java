@@ -1,6 +1,9 @@
 package com.inemory.user.domain.repository;
 
+import com.inemory.user.infrastructure.dto.AuthCreateTokenRspDto;
+import org.springframework.http.ResponseEntity;
+
 public interface AuthRepository {
 
-    Object createAccessTokenAndRefreshToken();
+    ResponseEntity<AuthCreateTokenRspDto> createAccessTokenAndRefreshToken(String userNo);
 }

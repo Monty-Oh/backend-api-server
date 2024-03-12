@@ -1,6 +1,7 @@
 package com.inemory.user.application.commandservice;
 
 import com.inemory.user.domain.model.command.UserLoginCommand;
+import com.inemory.user.domain.service.AuthTokenService;
 import com.inemory.user.domain.service.UserVerifyPasswordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class UserLoginCommandService {
 
     private final UserVerifyPasswordService userVerifyPasswordService;
+    private final AuthTokenService authTokenService;
 
     /**
      * 로그인 애플리케이션 서비스
@@ -20,6 +22,7 @@ public class UserLoginCommandService {
      */
     public Object login(UserLoginCommand userLoginCommand) {
         userVerifyPasswordService.verifyPassword(userLoginCommand.getLoginId(), userLoginCommand.getPassword());
-
+        authTokenService.getUserNoAndCreateToken(userLoginCommand.getLoginId());
+        return null;
     }
 }
