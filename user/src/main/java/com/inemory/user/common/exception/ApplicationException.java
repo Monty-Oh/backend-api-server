@@ -1,10 +1,12 @@
 package com.inemory.user.common.exception;
 
 import com.inemory.user.common.constants.ErrorCode;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 @Slf4j
+@Getter
 public class ApplicationException extends RuntimeException{
     private final String errorCode;
 

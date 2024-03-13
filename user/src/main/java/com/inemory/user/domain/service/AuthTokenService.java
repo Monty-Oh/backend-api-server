@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 import static com.inemory.user.common.constants.ErrorCode.EXTERNAL_SERVER_ERROR;
+import static com.inemory.user.common.constants.ErrorCode.NOT_FOUND_USER_INFO;
 
 @Slf4j
 @Component
@@ -37,7 +38,7 @@ public class AuthTokenService {
      */
     public AuthCreateTokenVo getUserNoAndCreateToken(String loginId) {
         User user = userRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER_INFO));
+                .orElseThrow(() -> new ApplicationException(NOT_FOUND_USER_INFO));
 
         ResponseEntity<AuthCreateTokenRspDto> authCreateTokenRspDtoResponseEntity = authRepository.createAccessTokenAndRefreshToken(user.getUserNo());
         if (Objects.isNull(authCreateTokenRspDtoResponseEntity.getBody())) {
