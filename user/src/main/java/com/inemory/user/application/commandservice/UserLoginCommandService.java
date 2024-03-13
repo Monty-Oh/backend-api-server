@@ -1,9 +1,12 @@
 package com.inemory.user.application.commandservice;
 
 import com.inemory.user.domain.model.command.UserLoginCommand;
+import com.inemory.user.domain.model.vo.AuthCreateTokenVo;
 import com.inemory.user.domain.service.AuthTokenService;
 import com.inemory.user.domain.service.UserVerifyPasswordService;
+import com.inemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,9 +23,8 @@ public class UserLoginCommandService {
      * @param userLoginCommand 로그인 요청 Command
      * @return 발급된 토큰 값
      */
-    public Object login(UserLoginCommand userLoginCommand) {
+    public AuthCreateTokenVo login(UserLoginCommand userLoginCommand) {
         userVerifyPasswordService.verifyPassword(userLoginCommand.getLoginId(), userLoginCommand.getPassword());
-        authTokenService.getUserNoAndCreateToken(userLoginCommand.getLoginId());
-        return null;
+        return authTokenService.getUserNoAndCreateToken(userLoginCommand.getLoginId());
     }
 }

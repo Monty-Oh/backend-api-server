@@ -2,7 +2,9 @@ package com.inemory.user.interfaces.rest.controller;
 
 import com.inemory.user.application.commandservice.UserLoginCommandService;
 import com.inemory.user.domain.model.command.UserLoginCommand;
+import com.inemory.user.domain.model.vo.AuthCreateTokenVo;
 import com.inemory.user.interfaces.rest.dto.UserLoginReqDto;
+import com.inemory.user.interfaces.rest.dto.UserLoginRspDto;
 import com.inemory.user.interfaces.rest.mapper.UserLoginCommandMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,8 +35,9 @@ public class UserController {
      */
     @PostMapping(LOGIN_URL)
     public ResponseEntity<Object> login(@RequestBody UserLoginReqDto userLoginReqDto) {
-        UserLoginCommand userLoginCommand = userLoginCommandMapper.dtoToCommand(userLoginReqDto);
-        userLoginCommandService.login(userLoginCommand);
-        return new ResponseEntity<>("TEST", HttpStatus.OK);
+        UserLoginCommand userLoginCommand = userLoginCommandMapper.mapToCommand(userLoginReqDto);
+        AuthCreateTokenVo authCreateTokenVo = userLoginCommandService.login(userLoginCommand);
+        UserLoginRspDto userLoginRspDto = userLoginCommandMapper.mapToRspDto(authCreateTokenVo);
+        return new ResponseEntity<>(userLoginRspDto, HttpStatus.OK);
     }
 }

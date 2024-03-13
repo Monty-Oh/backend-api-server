@@ -1,11 +1,12 @@
-package com.inemory.user.infrastructure.dto;
+package com.inemory.user.interfaces.rest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class AuthCreateTokenRspDto {
+public class UserLoginRspDto {
+
     private String accessToken;
 
     private String refreshToken;
