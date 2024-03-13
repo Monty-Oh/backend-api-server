@@ -43,6 +43,6 @@ public class AuthTokenService {
         if (Objects.isNull(authCreateTokenRspDtoResponseEntity.getBody())) {
             throw new ApplicationException(EXTERNAL_SERVER_ERROR);
         }
-        return authCreateTokenVoMapper.rspDtoToVo(authCreateTokenRspDtoResponseEntity.getBody());
+        return authCreateTokenVoMapper.mapToVo(authCreateTokenRspDtoResponseEntity.getBody());
     }
 }

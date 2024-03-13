@@ -8,5 +8,5 @@ import org.mapstruct.Mapper;
 @Mapper(config = MapStructConfig.class)
 public abstract class AuthCreateTokenVoMapper {
 
-    public abstract AuthCreateTokenVo rspDtoToVo(AuthCreateTokenRspDto authCreateTokenRspDto);
+    public abstract AuthCreateTokenVo mapToVo(AuthCreateTokenRspDto authCreateTokenRspDto);
 }
