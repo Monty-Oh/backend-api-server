@@ -1,6 +1,5 @@
 package com.inemory.user.domain.service;
 
-import com.inemory.user.common.constants.ErrorCode;
 import com.inemory.user.common.exception.ApplicationException;
 import com.inemory.user.domain.model.aggregate.User;
 import com.inemory.user.domain.model.vo.AuthCreateTokenVo;

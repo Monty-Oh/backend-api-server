@@ -1,6 +1,6 @@
 package com.inmemory.auth.domain.repository;
 
-import com.inmemory.auth.domain.aggregate.Auth;
+import com.inmemory.auth.domain.model.aggregate.Auth;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

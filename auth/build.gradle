@@ -19,6 +19,26 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //  lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    //	DB
+    implementation 'com.mysql:mysql-connector-j'
+    implementation 'com.h2database:h2'
+
+    //	JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //	flyway
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-mysql'
+
+    //  mapstruct
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 }
 
 //  TEST SETUP
@@ -66,25 +86,6 @@ jacocoTestCoverageVerification {
     }
 }
 //  TEST SETUP END
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    //	DB
-    implementation 'com.mysql:mysql-connector-j'
-    implementation 'com.h2database:h2'
-
-    //	JPA
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    //	flyway
-    implementation 'org.flywaydb:flyway-core'
-    implementation 'org.flywaydb:flyway-mysql'
-}
 
 tasks.register('buildLocalSetup', Exec) {
     description 'build local develop setup on docker'

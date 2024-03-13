@@ -1,6 +1,6 @@
 package com.inmemory.auth.domain.repository;
 
-import com.inmemory.auth.domain.aggregate.Auth;
+import com.inmemory.auth.domain.model.aggregate.Auth;
 
 import java.util.Optional;
 

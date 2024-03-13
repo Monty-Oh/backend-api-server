@@ -1,4 +1,4 @@
-package com.inmemory.auth.domain.aggregate;
+package com.inmemory.auth.domain.model.aggregate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,6 +1,9 @@
 package com.inmemory.auth.interfaces.rest.controller;
 
+import com.inmemory.auth.application.commandservice.AuthTokenCommandService;
+import com.inmemory.auth.domain.model.command.AuthCreateTokenCommand;
 import com.inmemory.auth.interfaces.rest.dto.AuthCreateTokenReqDto;
+import com.inmemory.auth.interfaces.rest.mapper.AuthCreateTokenCommandMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +19,14 @@ import static com.inmemory.auth.interfaces.rest.constants.AuthApiUrl.AUTH_V1_BAS
 @RequestMapping(AUTH_V1_BASE_URL)
 public class AuthTokenController {
 
+    private final AuthTokenCommandService authTokenCommandService;
+
+    private final AuthCreateTokenCommandMapper authCreateTokenCommandMapper;
+
     @PostMapping(AUTH_CREATE_TOKEN)
     public ResponseEntity<Object> createToken(AuthCreateTokenReqDto authCreateTokenReqDto) {
+        AuthCreateTokenCommand authCreateTokenCommand = authCreateTokenCommandMapper.mapToCommand(authCreateTokenReqDto);
+
 
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
