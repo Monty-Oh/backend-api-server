@@ -3,8 +3,9 @@ In-Memory 프로젝트
 
 ---
 ## Getting Started
-깃허브 주소: https://github.com/Monty-Oh/inmemory  
-HTTPS clone URL: https://github.com/Monty-Oh/inmemory.git
+깃허브 URL: https://github.com/Monty-Oh/inmemory  
+HTTPS clone URL: https://github.com/Monty-Oh/inmemory.git  
+Miro URL: https://miro.com/app/board/uXjVMqdk8fg=/?share_link_id=201338916303
 
 ---
 ## Local 개발 환경 구성

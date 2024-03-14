@@ -2,7 +2,9 @@ package com.inmemory.auth.interfaces.rest.controller;
 
 import com.inmemory.auth.application.commandservice.AuthTokenCommandService;
 import com.inmemory.auth.domain.model.command.AuthCreateTokenCommand;
+import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
 import com.inmemory.auth.interfaces.rest.dto.AuthCreateTokenReqDto;
+import com.inmemory.auth.interfaces.rest.dto.AuthCreateTokenRspDto;
 import com.inmemory.auth.interfaces.rest.mapper.AuthCreateTokenCommandMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,11 +25,17 @@ public class AuthTokenController {
 
     private final AuthCreateTokenCommandMapper authCreateTokenCommandMapper;
 
+    /**
+     * 토큰 생성 API
+     *
+     * @param authCreateTokenReqDto 토큰 생성 요청 Dto
+     * @return 토큰 생성 결과
+     */
     @PostMapping(AUTH_CREATE_TOKEN)
-    public ResponseEntity<Object> createToken(AuthCreateTokenReqDto authCreateTokenReqDto) {
+    public ResponseEntity<AuthCreateTokenRspDto> createToken(AuthCreateTokenReqDto authCreateTokenReqDto) {
         AuthCreateTokenCommand authCreateTokenCommand = authCreateTokenCommandMapper.mapToCommand(authCreateTokenReqDto);
-
-
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        AuthCreateTokenVo authCreateTokenVo = authTokenCommandService.createToken(authCreateTokenCommand);
+        AuthCreateTokenRspDto authCreateTokenRspDto = authCreateTokenCommandMapper.mapToRspDto(authCreateTokenVo);
+        return new ResponseEntity<>(authCreateTokenRspDto, HttpStatus.OK);
     }
 }

@@ -19,7 +19,13 @@ public class Auth {
     @Id
     private String userNo;
 
-    private String accessToken;
-
     private String refreshToken;
+
+    public Auth(String userNo) {
+        this.userNo = userNo;
+    }
+
+    public void changeRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

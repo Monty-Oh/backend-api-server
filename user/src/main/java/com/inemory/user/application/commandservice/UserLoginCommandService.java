@@ -2,11 +2,9 @@ package com.inemory.user.application.commandservice;
 
 import com.inemory.user.domain.model.command.UserLoginCommand;
 import com.inemory.user.domain.model.vo.AuthCreateTokenVo;
-import com.inemory.user.domain.service.AuthTokenService;
+import com.inemory.user.domain.service.AuthCreateTokenService;
 import com.inemory.user.domain.service.UserVerifyPasswordService;
-import com.inemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserLoginCommandService {
 
     private final UserVerifyPasswordService userVerifyPasswordService;
-    private final AuthTokenService authTokenService;
+    private final AuthCreateTokenService authCreateTokenService;
 
     /**
      * 로그인 애플리케이션 서비스
@@ -25,6 +23,6 @@ public class UserLoginCommandService {
      */
     public AuthCreateTokenVo login(UserLoginCommand userLoginCommand) {
         userVerifyPasswordService.verifyPassword(userLoginCommand.getLoginId(), userLoginCommand.getPassword());
-        return authTokenService.getUserNoAndCreateToken(userLoginCommand.getLoginId());
+        return authCreateTokenService.getUserNoAndCreateToken(userLoginCommand.getLoginId());
     }
 }

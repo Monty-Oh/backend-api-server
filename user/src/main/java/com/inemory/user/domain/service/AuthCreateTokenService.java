@@ -20,7 +20,7 @@ import static com.inemory.user.common.constants.ErrorCode.NOT_FOUND_USER_INFO;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AuthTokenService {
+public class AuthCreateTokenService {
 
     private final UserRepository userRepository;
     private final AuthRepository authRepository;
