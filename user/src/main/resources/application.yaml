@@ -59,6 +59,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+feign:
+  api:
+    auth-url: http://localhost:8081
 
 ---
 # develop 용 Spring Profile
