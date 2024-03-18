@@ -15,7 +15,6 @@ import static com.inemory.user.common.constants.ErrorCode.INVALID_PASSWORD;
 public class UserVerifyPasswordService {
 
     private final UserRepository userRepository;
-    private final EncryptUtil encryptUtil;
 
     /**
      * userId 와 password 를 비교해서 password 가 일치하는지 확인한다.
@@ -27,7 +26,7 @@ public class UserVerifyPasswordService {
         User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER_INFO));
 
-        if (!encryptUtil.match(password, user.getPassword())) {
+        if (!EncryptUtil.match(password, user.getPassword())) {
             throw new ApplicationException(INVALID_PASSWORD);
         }
     }
