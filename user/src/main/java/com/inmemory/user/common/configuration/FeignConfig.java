@@ -1,12 +1,11 @@
 package com.inmemory.user.common.configuration;
 
-import feign.ResponseInterceptor;
+import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;
 
 public class FeignConfig {
-
     @Bean
-    public ResponseInterceptor responseInterceptor() {
+    public ErrorDecoder errorDecoder() {
+        return new FeignErrorDecoder();
     }
-
 }

@@ -21,8 +21,7 @@ public enum ErrorCode {
     NOT_FOUND_TOKEN_INFO("0101", "토큰 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
 
     NOT_FOUND_USER_INFO("0301", "사용자 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
-    INVALID_PASSWORD("0302", "비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED)
-    ;
+    INVALID_PASSWORD("0302", "비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED);
 
     private final String code;
 
@@ -35,6 +34,6 @@ public enum ErrorCode {
     );
 
     public static ErrorCode findByCode(final String code) {
-        return ERROR_CODE_MAP.get(code);
+        return ERROR_CODE_MAP.getOrDefault(code, EXTERNAL_SERVER_ERROR);
     }
 }

@@ -5,6 +5,7 @@ import com.inmemory.user.domain.model.aggregate.User;
 import com.inmemory.user.domain.model.vo.AuthCreateTokenVo;
 import com.inmemory.user.domain.repository.AuthRepository;
 import com.inmemory.user.domain.repository.UserRepository;
+import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
 import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
 import com.inmemory.user.infrastructure.feign.mapper.AuthCreateTokenVoMapper;
 import com.inmemory.user.common.constants.ErrorCode;
@@ -37,7 +38,10 @@ public class AuthCreateTokenService {
         User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER_INFO));
 
-        ResponseEntity<AuthCreateTokenRspDto> authCreateTokenRspDtoResponseEntity = authRepository.createAccessTokenAndRefreshToken(user.getUserNo());
+        AuthCreateTokenReqDto authCreateTokenReqDto = AuthCreateTokenReqDto.builder()
+                .userNo(user.getUserNo())
+                .build();
+        ResponseEntity<AuthCreateTokenRspDto> authCreateTokenRspDtoResponseEntity = authRepository.createAccessTokenAndRefreshToken(authCreateTokenReqDto);
         if (Objects.isNull(authCreateTokenRspDtoResponseEntity.getBody())) {
             throw new ApplicationException(ErrorCode.EXTERNAL_SERVER_ERROR);
         }

@@ -1,1 +1,1 @@
-INSERT INTO users(user_id, user_no, login_id, password) VALUES('0', '0', 'admin', '$2a$10$iERYoAfhnu0QVfs/ZaLvkuWNlWel4uWlE4N1Hv2Nc4P3tQ1A0mtoK');
+INSERT INTO users(user_id, user_no, login_id, password) VALUES('0', '0', 'admin', '$2a$10$kMfZrcEBYlI26eIsfbbOQ.A1/WAT25YbVi7/Ure8NxY6FLE0oZfRa');

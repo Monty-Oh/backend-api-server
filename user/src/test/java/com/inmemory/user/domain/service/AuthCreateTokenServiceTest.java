@@ -49,7 +49,7 @@ class AuthCreateTokenServiceTest {
                 .accessToken("testAccessToken")
                 .refreshToken("testRefreshToken")
                 .build();
-        given(authRepository.createAccessTokenAndRefreshToken(anyString())).willReturn(ResponseEntity.of(Optional.of(authCreateTokenRspDto)));
+        given(authRepository.createAccessTokenAndRefreshToken(any())).willReturn(ResponseEntity.of(Optional.of(authCreateTokenRspDto)));
         AuthCreateTokenVo authCreateTokenVo = AuthCreateTokenVo.builder()
                 .accessToken(authCreateTokenRspDto.getAccessToken())
                 .refreshToken(authCreateTokenRspDto.getRefreshToken())
@@ -85,7 +85,7 @@ class AuthCreateTokenServiceTest {
                 .userNo("testUserNo")
                 .build();
         given(userRepository.findByLoginId(anyString())).willReturn(Optional.of(user));
-        given(authRepository.createAccessTokenAndRefreshToken(anyString())).willReturn(ResponseEntity.of(Optional.empty()));
+        given(authRepository.createAccessTokenAndRefreshToken(any())).willReturn(ResponseEntity.of(Optional.empty()));
 
         //  when,   then
         ApplicationException actual = assertThrows(ApplicationException.class, () -> authCreateTokenService.getUserNoAndCreateToken("testLoginId"));

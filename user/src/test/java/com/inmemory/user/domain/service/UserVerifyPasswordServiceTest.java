@@ -2,6 +2,7 @@ package com.inmemory.user.domain.service;
 
 import com.inmemory.user.common.constants.ErrorCode;
 import com.inmemory.user.common.exception.ApplicationException;
+import com.inmemory.user.common.utils.EncryptUtil;
 import com.inmemory.user.domain.model.aggregate.User;
 import com.inmemory.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
