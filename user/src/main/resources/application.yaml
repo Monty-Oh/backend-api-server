@@ -61,7 +61,7 @@ spring:
     show-sql: true
 feign:
   api:
-    auth-url: http://localhost:8081
+    auth-url: http://localhost:8080
 
 ---
 # develop 용 Spring Profile
