@@ -1,22 +1,18 @@
 package com.inmemory.user.infrastructure.feign;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.http.RequestMethod;
+import com.inmemory.user.common.constants.ErrorCode;
+import com.inmemory.user.common.exception.ApplicationException;
 import com.inmemory.user.infrastructure.feign.constants.AuthUrl;
 import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
 import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AuthFeignClientTest extends WireMockTest {
 
@@ -25,7 +21,7 @@ class AuthFeignClientTest extends WireMockTest {
 
     @Test
     @DisplayName("Auth 애플리케이션에게 토큰 생성 요청을 했고 성공했다.")
-    void createAccessTokenAndRefreshToken_success() throws JsonProcessingException {
+    void createAccessTokenAndRefreshToken_success() {
         //  given
         AuthCreateTokenRspDto authCreateTokenRspDto = AuthCreateTokenRspDto.builder()
                 .accessToken("testAccessToken")
@@ -51,5 +47,17 @@ class AuthFeignClientTest extends WireMockTest {
 
     @Test
     @DisplayName("Auth 애플리케이션에게 토큰 생성 요청을 했고 실패했다.")
+    void createAccessTokenAndRefreshToken_fail() {
+        //  given
+        setupFailResponse(RequestMethod.POST.value(), AuthUrl.AUTH_CREATE_TOKEN, ErrorCode.INTERNAL_SERVER_ERROR);
 
+        AuthCreateTokenReqDto authCreateTokenReqDto = AuthCreateTokenReqDto.builder()
+                .userNo("testUserNo")
+                .build();
+        //  when,   then
+        ApplicationException actual = assertThrows(ApplicationException.class, () -> authFeignClient.createAccessTokenAndRefreshToken(authCreateTokenReqDto));
+        assertAll(
+                () -> assertThat(actual.getErrorCode()).isEqualTo(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
+        );
+    }
 }
