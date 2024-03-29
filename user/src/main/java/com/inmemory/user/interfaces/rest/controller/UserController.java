@@ -3,12 +3,13 @@ package com.inmemory.user.interfaces.rest.controller;
 import com.inmemory.user.application.commandservice.UserLoginCommandService;
 import com.inmemory.user.domain.model.command.UserLoginCommand;
 import com.inmemory.user.domain.model.vo.AuthCreateTokenVo;
+import com.inmemory.user.interfaces.rest.constants.UserApiUrl;
 import com.inmemory.user.interfaces.rest.dto.UserLoginReqDto;
 import com.inmemory.user.interfaces.rest.dto.UserLoginRspDto;
 import com.inmemory.user.interfaces.rest.mapper.UserLoginCommandMapper;
-import com.inmemory.user.interfaces.rest.constants.UserApiUrl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,8 @@ public class UserController {
      * @param userLoginReqDto 로그인 요청 Dto
      * @return 토큰 생성 결과 값을 담은 응답
      */
-    @PostMapping(UserApiUrl.LOGIN_URL)
-    public ResponseEntity<Object> login(@RequestBody UserLoginReqDto userLoginReqDto) {
+    @PostMapping(value = UserApiUrl.LOGIN_URL, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserLoginRspDto> login(@RequestBody UserLoginReqDto userLoginReqDto) {
         UserLoginCommand userLoginCommand = userLoginCommandMapper.mapToCommand(userLoginReqDto);
         AuthCreateTokenVo authCreateTokenVo = userLoginCommandService.login(userLoginCommand);
         UserLoginRspDto userLoginRspDto = userLoginCommandMapper.mapToRspDto(authCreateTokenVo);

@@ -8,6 +8,7 @@ import com.inmemory.auth.interfaces.rest.dto.AuthCreateTokenRspDto;
 import com.inmemory.auth.interfaces.rest.mapper.AuthCreateTokenCommandMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class AuthTokenController {
      * @param authCreateTokenReqDto 토큰 생성 요청 Dto
      * @return 토큰 생성 결과
      */
-    @PostMapping(AUTH_CREATE_TOKEN)
+    @PostMapping(value = AUTH_CREATE_TOKEN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthCreateTokenRspDto> createToken(@RequestBody AuthCreateTokenReqDto authCreateTokenReqDto) {
         AuthCreateTokenCommand authCreateTokenCommand = authCreateTokenCommandMapper.mapToCommand(authCreateTokenReqDto);
         AuthCreateTokenVo authCreateTokenVo = authTokenCommandService.createToken(authCreateTokenCommand);

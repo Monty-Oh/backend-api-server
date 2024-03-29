@@ -1,16 +1,15 @@
 package com.inmemory.user.infrastructure.feign;
 
 import com.inmemory.user.common.configuration.FeignConfig;
-import com.inmemory.user.domain.repository.AuthRepository;
+import com.inmemory.user.infrastructure.feign.constants.AuthUrl;
 import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
 import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
-import com.inmemory.user.infrastructure.feign.constants.AuthUrl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(name = "AuthFeignClient", url = "${feign.api.auth-url}", configuration = FeignConfig.class)
-public interface AuthFeignClient extends AuthRepository {
+public interface AuthFeignClient {
 
     /**
      * Auth 애플리케이션에게 토큰 생성 요청을 한다.

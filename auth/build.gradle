@@ -18,12 +18,14 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     //  lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
     //	DB
     implementation 'com.mysql:mysql-connector-j'
@@ -47,14 +49,8 @@ dependencies {
 }
 
 //  TEST SETUP
-test {
-    useJUnitPlatform()
-    systemProperty('spring.profiles.active', 'unit-test')
-    finalizedBy('jacocoTestReport')
-}
-
 jacoco {
-    toolVersion = '0.8.8'
+    toolVersion = '0.8.11'
 }
 
 jacocoTestReport {
@@ -89,6 +85,12 @@ jacocoTestCoverageVerification {
             ])
         }))
     }
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty('spring.profiles.active', 'unit-test')
+    finalizedBy('jacocoTestReport')
 }
 //  TEST SETUP END
 

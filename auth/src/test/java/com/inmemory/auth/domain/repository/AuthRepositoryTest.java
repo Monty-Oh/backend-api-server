@@ -23,7 +23,6 @@ class AuthRepositoryTest {
         //  given
         Auth auth = Auth.builder()
                 .userNo("testUserNo")
-                .accessToken("testAccessToken")
                 .refreshToken("testRefreshToken")
                 .build();
         authRepository.save(auth);
@@ -36,7 +35,6 @@ class AuthRepositoryTest {
         Auth actual = result.get();
         assertAll(
                 () -> assertThat(actual.getUserNo()).isEqualTo(auth.getUserNo()),
-                () -> assertThat(actual.getAccessToken()).isEqualTo(auth.getAccessToken()),
                 () -> assertThat(actual.getRefreshToken()).isEqualTo(auth.getRefreshToken())
         );
     }

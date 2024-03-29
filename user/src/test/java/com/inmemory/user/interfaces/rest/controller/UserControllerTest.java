@@ -61,9 +61,11 @@ class UserControllerTest {
         given(userLoginCommandMapper.mapToRspDto(any())).willReturn(userLoginRspDto);
 
         //  when,   then
-        mockMvc.perform(MockMvcRequestBuilders.post(UserApiUrl.USER_V1_BASE_URL + UserApiUrl.LOGIN_URL)
-                        .content(objectMapper.writeValueAsString(userLoginReqDto))
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(
+                        MockMvcRequestBuilders.post(UserApiUrl.USER_V1_BASE_URL + UserApiUrl.LOGIN_URL)
+                                .content(objectMapper.writeValueAsString(userLoginReqDto))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().isOk())
                 .andExpect(content().string(objectMapper.writeValueAsString(userLoginRspDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
