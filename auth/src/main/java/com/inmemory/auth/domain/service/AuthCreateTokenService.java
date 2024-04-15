@@ -5,7 +5,6 @@ import com.inmemory.auth.domain.model.aggregate.Auth;
 import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
 import com.inmemory.auth.domain.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,12 +13,6 @@ public class AuthCreateTokenService {
 
     private final AuthRepository authRepository;
     private final JwtUtils jwtUtils;
-
-    @Value("${service.jwt.valid-time.access}")
-    private static long accessTokenValidTime;
-
-    @Value("${service.jwt.valid-time.refresh}")
-    private static long refreshTokenValidTime;
 
     /**
      * 인증에 필요한 엑세스 토큰과 리프레시 토큰을 발급하고, 반환한다.
@@ -36,8 +29,8 @@ public class AuthCreateTokenService {
 
     private AuthCreateTokenVo createAccessTokenAndRefreshToken(String userNo) {
         return AuthCreateTokenVo.builder()
-                .accessToken(jwtUtils.createToken(userNo, accessTokenValidTime))
-                .refreshToken(jwtUtils.createToken(userNo, refreshTokenValidTime))
+                .accessToken(jwtUtils.createAccessToken(userNo))
+                .refreshToken(jwtUtils.createRefreshToken(userNo))
                 .build();
     }
 
