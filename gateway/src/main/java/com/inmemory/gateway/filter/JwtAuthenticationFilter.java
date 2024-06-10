@@ -1,7 +1,7 @@
 package com.inmemory.gateway.filter;
 
-import com.inmemory.gateway.exception.InvalidTokenException;
-import com.inmemory.gateway.utils.JwtUtils;
+import com.inmemory.gateway.common.exception.InvalidTokenException;
+import com.inmemory.gateway.common.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Objects;
 
-import static com.inmemory.gateway.constants.ErrorCode.TOKEN_NOT_FOUND_ERROR;
-import static com.inmemory.gateway.constants.StaticValue.HEADER_ACCESS_TOKEN;
+import static com.inmemory.gateway.common.constants.ErrorCode.TOKEN_NOT_FOUND_ERROR;
+import static com.inmemory.gateway.common.constants.StaticValue.HEADER_ACCESS_TOKEN;
 
 @Slf4j
 @Component

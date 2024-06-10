@@ -1,6 +1,6 @@
-package com.inmemory.gateway.exception;
+package com.inmemory.gateway.common.exception;
 
-import com.inmemory.gateway.constants.ErrorCode;
+import com.inmemory.gateway.common.constants.ErrorCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

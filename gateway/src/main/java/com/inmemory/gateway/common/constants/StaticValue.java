@@ -1,4 +1,4 @@
-package com.inmemory.gateway.constants;
+package com.inmemory.gateway.common.constants;
 
 public class StaticValue {
 

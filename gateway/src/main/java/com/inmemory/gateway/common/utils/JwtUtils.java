@@ -1,7 +1,7 @@
-package com.inmemory.gateway.utils;
+package com.inmemory.gateway.common.utils;
 
-import com.inmemory.gateway.exception.ApplicationException;
-import com.inmemory.gateway.exception.InvalidTokenException;
+import com.inmemory.gateway.common.exception.ApplicationException;
+import com.inmemory.gateway.common.exception.InvalidTokenException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -10,11 +10,13 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 
-import static com.inmemory.gateway.constants.ErrorCode.*;
+import static com.inmemory.gateway.common.constants.ErrorCode.*;
 
 @Slf4j
 @Component
