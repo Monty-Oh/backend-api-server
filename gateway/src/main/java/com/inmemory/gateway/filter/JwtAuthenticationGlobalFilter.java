@@ -1,5 +1,6 @@
 package com.inmemory.gateway.filter;
 
+import com.inmemory.gateway.common.constants.ErrorCode;
 import com.inmemory.gateway.common.exception.InvalidTokenException;
 import com.inmemory.gateway.common.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +16,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-import static com.inmemory.gateway.common.constants.ErrorCode.TOKEN_NOT_FOUND_ERROR;
-import static com.inmemory.gateway.common.constants.StaticValue.HEADER_ACCESS_TOKEN;
-
 @Component
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -25,6 +23,9 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
 
     private final JwtUtils jwtUtils;
 
+    /**
+     * 액세스 토큰 검증 필터
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
@@ -40,9 +41,9 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
      * @return AccessToken 정보
      */
     private String getAccessToken(HttpHeaders httpHeaders) {
-        String accessToken = httpHeaders.getFirst(HEADER_ACCESS_TOKEN);
+        String accessToken = httpHeaders.getFirst(HttpHeaders.AUTHORIZATION);
         if (Objects.isNull(accessToken)) {
-            throw new InvalidTokenException(TOKEN_NOT_FOUND_ERROR);
+            throw new InvalidTokenException(ErrorCode.TOKEN_NOT_FOUND_ERROR);
         }
         return accessToken;
     }
