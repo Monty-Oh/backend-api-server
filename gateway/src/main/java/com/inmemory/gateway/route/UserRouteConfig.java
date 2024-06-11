@@ -23,8 +23,11 @@ public class UserRouteConfig {
     @Bean
     public RouteLocator userRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route(USER_LOGIN_ROUTE_ID, r -> r.path(REQUEST_LOGIN_URI)
-                        .uri(MAPPING_USER_URL)
+                .route(
+                        USER_LOGIN_ROUTE_ID,
+                        route -> route
+                                .path(REQUEST_LOGIN_URI)
+                                .uri(MAPPING_USER_URL)
                 )
                 .build()
                 ;
