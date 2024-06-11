@@ -8,6 +8,10 @@ spring:
         - common
       develop:
         - common
+  config:
+    import:
+      - classpath:config/whitelist.yaml
+
 
 ---
 # 공통

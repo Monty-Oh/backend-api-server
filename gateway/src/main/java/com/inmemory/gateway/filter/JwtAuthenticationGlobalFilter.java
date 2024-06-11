@@ -2,6 +2,7 @@ package com.inmemory.gateway.filter;
 
 import com.inmemory.gateway.common.constants.ErrorCode;
 import com.inmemory.gateway.common.exception.InvalidTokenException;
+import com.inmemory.gateway.common.property.WhiteListProperties;
 import com.inmemory.gateway.common.utils.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -21,6 +22,8 @@ import java.util.Objects;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class JwtAuthenticationGlobalFilter implements GlobalFilter {
 
+    private final WhiteListProperties whiteListProperties;
+
     private final JwtUtils jwtUtils;
 
     /**
@@ -29,6 +32,10 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        if (whiteListProperties.isWhiteList(request.getURI().getPath())) {
+            return chain.filter(exchange);
+        }
+
         String accessToken = getAccessToken(request.getHeaders());
         jwtUtils.validateToken(accessToken);
         return chain.filter(exchange);

@@ -1,0 +1,3 @@
+whitelist:
+  urls:
+    - "/swagger-ui"
