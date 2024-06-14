@@ -88,6 +88,6 @@ dependencies {
 
 tasks.register('buildLocalSetup', Exec) {
     description 'build local develop setup on docker'
-    commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'container', 'up', '-d'
+    commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'inmemory-local', 'up', '-d'
     group 'build setup'
 }

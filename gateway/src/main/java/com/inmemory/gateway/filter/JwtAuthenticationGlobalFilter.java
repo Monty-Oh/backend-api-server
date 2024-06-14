@@ -1,9 +1,15 @@
 package com.inmemory.gateway.filter;
 
-import com.inmemory.gateway.common.constants.ErrorCode;
+import com.inmemory.gateway.common.constant.ErrorCode;
+import com.inmemory.gateway.common.exception.ApplicationException;
 import com.inmemory.gateway.common.exception.InvalidTokenException;
 import com.inmemory.gateway.common.property.WhiteListProperties;
-import com.inmemory.gateway.common.utils.JwtUtils;
+import com.inmemory.gateway.common.util.JwtUtils;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -17,6 +23,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
+import static com.inmemory.gateway.common.constant.ErrorCode.*;
+
 @Component
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -28,6 +36,7 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
 
     /**
      * 액세스 토큰 검증 필터
+     * 액세스 토큰 파싱 후 Attributes 에 저장한다.
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -37,7 +46,9 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
         }
 
         String accessToken = getAccessToken(request.getHeaders());
-        jwtUtils.validateToken(accessToken);
+        Jws<Claims> accessTokenClaims = this.parsingAccessTokenToClaims(accessToken);
+
+        exchange.getAttributes().put(HttpHeaders.AUTHORIZATION, accessTokenClaims);
         return chain.filter(exchange);
     }
 
@@ -53,5 +64,22 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
             throw new InvalidTokenException(ErrorCode.TOKEN_NOT_FOUND_ERROR);
         }
         return accessToken;
+    }
+
+    /**
+     * 액세스 토큰을 Claims 로 파싱한다.
+     *
+     * @param accessToken 요청으로부터 전달받은 액세스 토큰
+     */
+    private Jws<Claims> parsingAccessTokenToClaims(String accessToken) {
+        try {
+            return jwtUtils.parsingToken(accessToken);
+        } catch (ExpiredJwtException exception) {
+            throw new InvalidTokenException(TOKEN_EXPIRED_ERROR);
+        } catch (SignatureException | MalformedJwtException exception) {
+            throw new InvalidTokenException(TOKEN_STATUS_ERROR);
+        } catch (Exception exception) {
+            throw new ApplicationException(INTERNAL_SERVER_ERROR);
+        }
     }
 }

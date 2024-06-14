@@ -40,8 +40,8 @@ dependencies {
     implementation 'org.flywaydb:flyway-mysql'
 
     //  mapstruct
-    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
     //  feign
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
@@ -105,6 +105,6 @@ test {
 
 tasks.register('buildLocalSetup', Exec) {
     description 'build local develop setup on docker'
-    commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'container', 'up', '-d'
+    commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'inmemory-local', 'up', '-d'
     group 'build setup'
 }

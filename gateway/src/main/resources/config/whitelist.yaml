@@ -1,3 +1,4 @@
 whitelist:
   urls:
     - "/swagger-ui"
+    - "/user/v1/users/login"

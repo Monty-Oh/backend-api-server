@@ -7,7 +7,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.inmemory.gateway.common.constants.ApiUrl.*;
+import static com.inmemory.gateway.common.constant.ApiUrl.*;
 
 @Slf4j
 @Configuration
@@ -15,10 +15,7 @@ import static com.inmemory.gateway.common.constants.ApiUrl.*;
 public class UserRouteConfig {
 
     /**
-     * 로그인 요청 API 대응 라우터
-     *
-     * @param builder RouteLocatorBuilder
-     * @return RouteLocator
+     * user 서비스 대응 라우터
      */
     @Bean
     public RouteLocator userRoutes(RouteLocatorBuilder builder) {
@@ -26,7 +23,7 @@ public class UserRouteConfig {
                 .route(
                         USER_LOGIN_ROUTE_ID,
                         route -> route
-                                .path(REQUEST_LOGIN_URI)
+                                .path("/user/**")
                                 .uri(MAPPING_USER_URL)
                 )
                 .build()

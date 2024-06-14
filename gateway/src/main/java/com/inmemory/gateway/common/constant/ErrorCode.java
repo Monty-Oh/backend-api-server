@@ -1,4 +1,4 @@
-package com.inmemory.gateway.common.constants;
+package com.inmemory.gateway.common.constant;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -11,9 +11,9 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebExceptionHandler;
 import reactor.core.publisher.Mono;
 
-import static com.inmemory.gateway.common.constants.ErrorCode.INTERNAL_SERVER_ERROR;
-import static com.inmemory.gateway.common.constants.StaticValue.HEADER_RESPONSE_CODE;
-import static com.inmemory.gateway.common.constants.StaticValue.HEADER_RESPONSE_MESSAGE;
+import static com.inmemory.gateway.common.constant.ErrorCode.INTERNAL_SERVER_ERROR;
+import static com.inmemory.gateway.common.constant.StaticValues.HEADER_RESPONSE_CODE;
+import static com.inmemory.gateway.common.constant.StaticValues.HEADER_RESPONSE_MESSAGE;
 
 @Order(-2)
 @Slf4j

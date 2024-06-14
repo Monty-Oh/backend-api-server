@@ -1,6 +1,6 @@
-package com.inmemory.gateway.common.constants;
+package com.inmemory.gateway.common.constant;
 
-public class StaticValue {
+public class StaticValues {
     public static final String HEADER_REFRESH_TOKEN = "refresh_token";
 
     public static final String HEADER_RESPONSE_CODE = "errorCode";
