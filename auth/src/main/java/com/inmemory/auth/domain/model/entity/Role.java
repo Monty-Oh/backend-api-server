@@ -1,6 +1,5 @@
-package com.inmemory.user.domain.model.aggregate;
+package com.inmemory.auth.domain.model.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,21 +9,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "roles")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Role {
 
     @Id
-    @Column(name = "id")
-    private int userId;
+    private int id;
 
-    @Column(name = "no")
-    private String userNo;
+    private String name;
 
-    private String loginId;
-
-    private String password;
+    private String description;
 }

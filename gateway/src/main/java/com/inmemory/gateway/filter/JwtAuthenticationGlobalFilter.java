@@ -25,6 +25,11 @@ import java.util.Objects;
 
 import static com.inmemory.gateway.common.constant.ErrorCode.*;
 
+/**
+ * Spring Security 로 인증/인가 기능 옮김으로써 미사용
+ * TODO: 삭제
+ */
+@Deprecated
 @Component
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -37,18 +42,19 @@ public class JwtAuthenticationGlobalFilter implements GlobalFilter {
     /**
      * 액세스 토큰 검증 필터
      * 액세스 토큰 파싱 후 Attributes 에 저장한다.
+     *
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
-        if (whiteListProperties.isWhiteList(request.getURI().getPath())) {
-            return chain.filter(exchange);
-        }
-
-        String accessToken = getAccessToken(request.getHeaders());
-        Jws<Claims> accessTokenClaims = this.parsingAccessTokenToClaims(accessToken);
-
-        exchange.getAttributes().put(HttpHeaders.AUTHORIZATION, accessTokenClaims);
+//        ServerHttpRequest request = exchange.getRequest();
+//        if (whiteListProperties.isWhiteList(request.getURI().getPath())) {
+//            return chain.filter(exchange);
+//        }
+//
+//        String accessToken = getAccessToken(request.getHeaders());
+//        Jws<Claims> accessTokenClaims = this.parsingAccessTokenToClaims(accessToken);
+//
+//        exchange.getAttributes().put(HttpHeaders.AUTHORIZATION, accessTokenClaims);
         return chain.filter(exchange);
     }
 
