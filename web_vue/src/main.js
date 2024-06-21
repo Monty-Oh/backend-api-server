@@ -1,6 +1,9 @@
-import './assets/main.css'
-
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
+import store from './store'
 
-createApp(App).mount('#app')
+//  Vue Application Setting
+createApp(App)
+    .use(store)
+    .mount('#app')
+;
