@@ -15,11 +15,13 @@ function requestServerStatus() {
 }
 
 function requestLogin(loginId, password) {
-    console.log(loginId, password);
-    return axios.post(
-        userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
-        {loginId, password}
-    )
+    return axios({
+        url: userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
+        method: 'post',
+        data: {
+            loginId, password
+        }
+    })
 }
 
 export {
