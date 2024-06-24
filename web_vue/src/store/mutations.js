@@ -1,6 +1,7 @@
 const mutations = {
-    SET_STATE(state, {menu, data}) {
-        state[menu] = data;
+    SET_ACCESS_TOKEN: (state) => {
+        // state.accessToken = accessToken;
+        console.log('mutations');
     }
 }
 

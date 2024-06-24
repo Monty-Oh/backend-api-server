@@ -1,10 +1,11 @@
-import {requestServerStatus} from "@/api/index.js";
+import {requestLogin} from "@/api/index.js";
 
 const actions = {
-    async FETCH_STATE() {
+    async REQUEST_LOGIN(context, {id, password}) {
         try {
-            const response = await requestServerStatus();
-            console.log(response);
+            const result = await requestLogin(id, password);
+            console.log(result);
+            context.commit('SET_ACCESS_TOKEN');
         } catch (e) {
             console.error(e);
         }

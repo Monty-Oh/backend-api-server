@@ -1,9 +1,21 @@
 <script setup>
-  import {store} from "@/store/index.js";
 
-  function loginButton() {
-    store.commit('FETCH_STATE')
+import store from "@/store/index.js";
+import {ref} from "vue";
+
+const inputId = ref('');
+const inputPassword = ref('');
+
+function loginButton() {
+  if (inputId.value === '' || inputPassword.value === '') {
+    alert('아이디 또는 패스워드를 입력해주세요.')
+    return;
   }
+  store.dispatch('REQUEST_LOGIN', {
+    id: inputId.value,
+    password: inputPassword.value
+  });
+}
 </script>
 
 <template>
@@ -18,12 +30,12 @@
       </legend>
       <div>
         <h3>
-          ID: <input>
+          ID: <input v-model="inputId">
         </h3>
       </div>
       <div>
         <h3>
-          Password: <input>
+          Password: <input type="password" v-model="inputPassword">
         </h3>
       </div>
       <button @click="loginButton">로그인</button>
