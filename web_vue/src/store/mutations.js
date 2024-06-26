@@ -1,7 +1,7 @@
 const mutations = {
-    SET_ACCESS_TOKEN: (state) => {
-        // state.accessToken = accessToken;
-        console.log('mutations');
+    SET_TOKENS: (state, result) => {
+        state.accessToken = result.data.accessToken;
+        state.refreshToken = result.data.refreshToken;
     }
 }
 

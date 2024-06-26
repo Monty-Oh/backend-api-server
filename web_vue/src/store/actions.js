@@ -4,8 +4,7 @@ const actions = {
     async REQUEST_LOGIN(context, {id, password}) {
         try {
             const result = await requestLogin(id, password);
-            console.log(result.data);
-            context.commit('SET_ACCESS_TOKEN');
+            context.commit('SET_TOKENS', result);
         } catch (e) {
             console.error(e);
         }
