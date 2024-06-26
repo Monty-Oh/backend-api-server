@@ -1,12 +1,11 @@
 <script setup>
 import LoginPage from "@/components/LoginPage.vue";
-import {ref} from "vue";
-
-const msg = ref("message!!");
+import Footer from "@/components/common/Footer.vue";
 </script>
 
 <template>
-  <main>
-    <LoginPage/>
-  </main>
+  <body>
+  <LoginPage/>
+  <Footer/>
+  </body>
 </template>

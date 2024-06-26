@@ -1,4 +1,4 @@
-import {requestLogin, requestServerStatus} from "@/api/index.js";
+import {requestLogin} from "@/api/index.js";
 
 const actions = {
     async REQUEST_LOGIN(context, {id, password}) {

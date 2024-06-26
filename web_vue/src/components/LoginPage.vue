@@ -23,22 +23,27 @@ function loginButton() {
     <h1>LOGIN PAGE</h1>
     <hr>
   </header>
-  <div>
-    <fieldset>
-      <legend>
-        <h2>로그인</h2>
-      </legend>
-      <div>
-        <h3>
-          ID: <input v-model="inputId">
-        </h3>
-      </div>
-      <div>
-        <h3>
-          Password: <input type="password" v-model="inputPassword">
-        </h3>
-      </div>
-      <button @click="loginButton">로그인</button>
-    </fieldset>
-  </div>
+  <main>
+    <div>
+      <fieldset>
+        <legend>
+          <h2>로그인</h2>
+        </legend>
+        <div>
+          <h3>
+            ID: <input v-model="inputId">
+          </h3>
+        </div>
+        <div>
+          <h3>
+            Password: <input type="password" v-model="inputPassword">
+          </h3>
+        </div>
+        <button @click="loginButton">로그인</button>
+      </fieldset>
+      <p>
+        <a href="" target="_blank">게스트로 오셨다면?</a>
+      </p>
+    </div>
+  </main>
 </template>

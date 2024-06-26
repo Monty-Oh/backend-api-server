@@ -9,11 +9,7 @@ const userHttpConfig = {
     }
 }
 
-//  HTTP 요청 Functions
-function requestServerStatus() {
-    return axios.get(userHttpConfig.baseUrl + userHttpConfig.urls.userHealthCheck);
-}
-
+//  로그인 요청
 function requestLogin(loginId, password) {
     return axios({
         url: userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
@@ -25,6 +21,5 @@ function requestLogin(loginId, password) {
 }
 
 export {
-    requestServerStatus,
     requestLogin,
 }
