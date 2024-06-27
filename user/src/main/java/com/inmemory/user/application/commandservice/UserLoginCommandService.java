@@ -23,6 +23,6 @@ public class UserLoginCommandService {
      */
     public AuthCreateTokenVo login(UserLoginCommand userLoginCommand) {
         userVerifyPasswordService.verifyPassword(userLoginCommand.getLoginId(), userLoginCommand.getPassword());
-        return authCreateTokenService.getUserNoAndCreateToken(userLoginCommand.getLoginId());
+        return authCreateTokenService.getTokens(userLoginCommand.getLoginId());
     }
 }

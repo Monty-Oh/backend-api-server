@@ -47,7 +47,7 @@ class AuthCreateTokenServiceTest {
         given(authRepository.createAccessTokenAndRefreshToken(any())).willReturn(authCreateTokenVo);
 
         //  when
-        AuthCreateTokenVo actual = authCreateTokenService.getUserNoAndCreateToken("testLoginId");
+        AuthCreateTokenVo actual = authCreateTokenService.getTokens("testLoginId");
 
         //  then
         assertAll(
@@ -60,7 +60,7 @@ class AuthCreateTokenServiceTest {
     @DisplayName("회원 정보가 존재하지 않는다.")
     void getUserNoAndCreateToken_not_found_user_info() {
         //  when,   then
-        ApplicationException actual = assertThrows(ApplicationException.class, () -> authCreateTokenService.getUserNoAndCreateToken("testLoginId"));
+        ApplicationException actual = assertThrows(ApplicationException.class, () -> authCreateTokenService.getTokens("testLoginId"));
         assertAll(
                 () -> assertThat(actual.getErrorCode()).isEqualTo(ErrorCode.NOT_FOUND_USER_INFO.getCode()),
                 () -> assertThat(actual.getMessage()).isEqualTo(ErrorCode.NOT_FOUND_USER_INFO.getMessage())

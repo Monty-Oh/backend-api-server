@@ -37,7 +37,7 @@ class UserLoginCommandServiceTest {
                 .accessToken("testAccessToken")
                 .refreshToken("testRefreshToken")
                 .build();
-        given(authCreateTokenService.getUserNoAndCreateToken(anyString())).willReturn(authCreateTokenVo);
+        given(authCreateTokenService.getTokens(anyString())).willReturn(authCreateTokenVo);
         UserLoginCommand userLoginCommand = UserLoginCommand.builder()
                 .loginId("testLoginId")
                 .password("testPassword")

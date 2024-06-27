@@ -26,7 +26,7 @@ public class AuthCreateTokenService {
      * @param loginId 로그인 아이디
      * @return 토큰 생성 결과
      */
-    public AuthCreateTokenVo getUserNoAndCreateToken(String loginId) {
+    public AuthCreateTokenVo getTokens(String loginId) {
         User user = userRepository.findByLoginId(loginId)
                 .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_USER_INFO));
 

@@ -47,6 +47,7 @@ public class SpringSecurityAuthenticationManager implements ReactiveAuthenticati
 
     /**
      * 액세스 토큰을 Claims 로 파싱한다.
+     * 파싱과 함께 검증도 실시한다.
      *
      * @param accessToken 요청으로부터 전달받은 액세스 토큰
      */
