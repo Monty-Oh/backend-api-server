@@ -2,10 +2,12 @@ package com.inmemory.auth.domain.service;
 
 import com.inmemory.auth.common.utils.JwtUtils;
 import com.inmemory.auth.domain.model.aggregate.Auth;
+import com.inmemory.auth.domain.model.aggregate.RefreshToken;
 import com.inmemory.auth.domain.model.entity.Role;
 import com.inmemory.auth.domain.model.entity.UserRole;
 import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
 import com.inmemory.auth.domain.repository.AuthRepository;
+import com.inmemory.auth.domain.repository.RefreshTokenRepository;
 import com.inmemory.auth.domain.repository.RoleRepository;
 import com.inmemory.auth.domain.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class AuthCreateTokenService {
 
     private final AuthRepository authRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
     private final UserRoleRepository userRoleRepository;
     private final RoleRepository roleRepository;
     private final JwtUtils jwtUtils;
@@ -61,6 +64,10 @@ public class AuthCreateTokenService {
         Auth auth = authRepository.findByUserNo(userNo).orElse(new Auth(userNo));
         auth.changeRefreshToken(refreshToken);
         authRepository.save(auth);
+
+        RefreshToken refreshToken1 = refreshTokenRepository.findByUserNo(userNo).orElse(new RefreshToken(userNo));
+        refreshToken1.changeRefreshToken(refreshToken);
+        refreshTokenRepository.save(refreshToken1);
     }
 
     /**

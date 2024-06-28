@@ -30,6 +30,7 @@ dependencies {
     //	DB
     implementation 'com.mysql:mysql-connector-j'
     implementation 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     //	JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -104,7 +105,7 @@ test {
 }
 //  TEST SETUP END
 
-tasks.register('buildLocalSetup', Exec) {
+tasks.register('LOCAL_DATABASE_SETUP', Exec) {
     description 'build local develop setup on docker'
     commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'inmemory-local', 'up', '-d'
     group 'build setup'
