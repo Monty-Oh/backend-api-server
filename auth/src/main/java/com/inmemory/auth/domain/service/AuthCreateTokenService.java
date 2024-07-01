@@ -2,17 +2,18 @@ package com.inmemory.auth.domain.service;
 
 import com.inmemory.auth.common.utils.JwtUtils;
 import com.inmemory.auth.domain.model.aggregate.Auth;
-import com.inmemory.auth.domain.model.aggregate.RefreshToken;
 import com.inmemory.auth.domain.model.entity.Role;
 import com.inmemory.auth.domain.model.entity.UserRole;
 import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
 import com.inmemory.auth.domain.repository.AuthRepository;
-import com.inmemory.auth.domain.repository.RefreshTokenRepository;
 import com.inmemory.auth.domain.repository.RoleRepository;
 import com.inmemory.auth.domain.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +21,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthCreateTokenService {
 
-    private final AuthRepository authRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+    @Value("${redis.refresh-token.ttl}")
+    private int refreshKeyTtl;
+
     private final UserRoleRepository userRoleRepository;
+    private final AuthRepository authRepository;
     private final RoleRepository roleRepository;
     private final JwtUtils jwtUtils;
 
@@ -33,10 +36,11 @@ public class AuthCreateTokenService {
      * @param userNo 회원 번호
      * @return 액세스 토큰과 리프레시 토큰
      */
+    @CachePut(key = "#userNo")
     public AuthCreateTokenVo createTokenAndSaveRefreshToken(String userNo) {
         List<String> userRoleList = this.getUserRoleList(userNo);
         AuthCreateTokenVo authCreateTokenVo = this.createAccessTokenAndRefreshToken(userNo, userRoleList);
-        saveRefreshToken(userNo, authCreateTokenVo.getRefreshToken());
+        this.saveRefreshToken(userNo, authCreateTokenVo.getRefreshToken());
         return authCreateTokenVo;
     }
 
@@ -55,19 +59,18 @@ public class AuthCreateTokenService {
     }
 
     /**
-     * 리프레시 토큰을 만들고 저장한다.
+     * 리프레시 토큰을 저장한다.
      *
-     * @param userNo
-     * @param refreshToken
+     * @param userNo       회원 번호
+     * @param refreshToken 만들어진 리프레시 토큰
      */
     private void saveRefreshToken(String userNo, String refreshToken) {
-        Auth auth = authRepository.findByUserNo(userNo).orElse(new Auth(userNo));
+        Auth auth = authRepository.findByUserNo(userNo)
+                .orElse(
+                        new Auth(userNo, Duration.ofMinutes(refreshKeyTtl))
+                );
         auth.changeRefreshToken(refreshToken);
         authRepository.save(auth);
-
-        RefreshToken refreshToken1 = refreshTokenRepository.findByUserNo(userNo).orElse(new RefreshToken(userNo));
-        refreshToken1.changeRefreshToken(refreshToken);
-        refreshTokenRepository.save(refreshToken1);
     }
 
     /**

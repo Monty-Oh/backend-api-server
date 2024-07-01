@@ -1,31 +1,37 @@
 package com.inmemory.auth.domain.model.aggregate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
+import org.springframework.data.redis.core.index.Indexed;
 
-@Entity
-@Table(name = "auth")
+import java.time.Duration;
+
+@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@RedisHash(value = "refreshToken")
 public class Auth {
-
     @Id
     private String userNo;
 
-    private String refreshToken;
+    @Indexed
+    private String token;
 
-    public Auth(String userNo) {
+    @TimeToLive
+    private long ttl;
+
+    public Auth(String userNo, Duration ttlMinute) {
         this.userNo = userNo;
+        this.ttl = ttlMinute.getSeconds();
     }
 
-    public void changeRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void changeRefreshToken(String token) {
+        this.token = token;
     }
 }
