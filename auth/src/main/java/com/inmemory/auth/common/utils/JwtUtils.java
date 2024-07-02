@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class JwtUtils {
                 .add("userRoles", userRoleList)
                 .and()
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + accessTokenValidTime))
+                .expiration(new Date(System.currentTimeMillis() + Duration.ofMinutes(accessTokenValidTime).toMillis()))
                 .signWith(jwtSecretKey)
                 .compact()
                 ;
@@ -56,7 +57,7 @@ public class JwtUtils {
                 .add("userNo", userNo)
                 .and()
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + refreshTokenValidTime))
+                .expiration(new Date(System.currentTimeMillis() + Duration.ofMinutes(refreshTokenValidTime).toMillis()))
                 .signWith(jwtSecretKey)
                 .compact()
                 ;
