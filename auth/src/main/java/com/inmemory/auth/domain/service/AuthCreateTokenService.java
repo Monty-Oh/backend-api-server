@@ -10,7 +10,6 @@ import com.inmemory.auth.domain.repository.RoleRepository;
 import com.inmemory.auth.domain.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -36,7 +35,6 @@ public class AuthCreateTokenService {
      * @param userNo 회원 번호
      * @return 액세스 토큰과 리프레시 토큰
      */
-    @CachePut(key = "#userNo")
     public AuthCreateTokenVo createTokenAndSaveRefreshToken(String userNo) {
         List<String> userRoleList = this.getUserRoleList(userNo);
         AuthCreateTokenVo authCreateTokenVo = this.createAccessTokenAndRefreshToken(userNo, userRoleList);
