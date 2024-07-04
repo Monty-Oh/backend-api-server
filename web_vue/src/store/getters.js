@@ -1,5 +1,6 @@
 const getters = {
-    fetchedAccessToken: state => state.accessToken,
+    getAccessToken: state => () => state.accessToken,
+    getRefreshToken: state => () => state.refreshToken
 }
 
 export default getters;

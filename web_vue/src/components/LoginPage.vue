@@ -2,6 +2,7 @@
 
 import store from "@/store/index.js";
 import {ref} from "vue";
+import $store from "../store/state.js";
 
 const inputId = ref('');
 const inputPassword = ref('');
@@ -31,16 +32,20 @@ function loginButton() {
         </legend>
         <div>
           <h3>
-            ID: <input v-model="inputId">
+            <input v-model="inputId" placeholder="ID">
           </h3>
         </div>
         <div>
           <h3>
-            Password: <input type="password" v-model="inputPassword">
+            <input type="password" v-model="inputPassword" placeholder="Password">
           </h3>
         </div>
         <button @click="loginButton">로그인</button>
       </fieldset>
+      <div>
+        <p>Access_Token: {{store.getters.getAccessToken()}}</p>
+        <p>Refresh_Token: {{store.getters.getRefreshToken()}}</p>
+      </div>
       <p>
         <a href="" target="_blank">게스트로 오셨다면?</a>
       </p>
