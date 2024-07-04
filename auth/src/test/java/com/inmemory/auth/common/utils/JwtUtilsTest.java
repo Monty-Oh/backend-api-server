@@ -68,5 +68,21 @@ class JwtUtilsTest {
 
     @Test
     void createRefreshToken() {
+        //  given
+        String userNo = "testUserNo";
+
+        //  when
+        String actual = jwtUtils.createRefreshToken(userNo);
+
+        //  then
+        Jws<Claims> actualClaims = Jwts.parser()
+                .verifyWith(jwtSecretKey)
+                .build()
+                .parseSignedClaims(actual);
+        String actualUserNo = (String) actualClaims.getPayload().get("userNo");
+
+        assertAll(
+                () -> assertThat(actualUserNo).isEqualTo(userNo)
+        );
     }
 }
