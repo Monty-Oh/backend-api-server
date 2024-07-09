@@ -40,6 +40,9 @@ spring:
     validate-migration-naming: true
 server:
   port: 8083
+feign:
+  api:
+    auth-url: http://localhost:8081
 
 ---
 # unit-test 용 Spring Profile
@@ -56,6 +59,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+feign:
+  api:
+    auth-url: http://localhost:8080
 
 ---
 # develop 용 Spring Profile

@@ -26,6 +26,10 @@ spring:
   config:
     activate:
       on-profile: local
+  data:
+    redis:
+      host: localhost
+      port: 16379
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:13306/auth
@@ -56,7 +60,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
 ---
 # develop 용 Spring Profile
 spring:

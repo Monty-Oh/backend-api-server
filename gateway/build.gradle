@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.1'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'jacoco'
 }
 
 group = 'com.inmemory'
@@ -24,6 +25,17 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //  Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //  JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+
+    //  macos 전용
+    implementation 'io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64'
 }
 
 dependencyManagement {
@@ -35,3 +47,49 @@ dependencyManagement {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+//  TEST SETUP
+test {
+    useJUnitPlatform()
+    systemProperty('spring.profiles.active', 'unit-test')
+    finalizedBy('jacocoTestReport')
+}
+
+jacoco {
+    toolVersion = '0.8.8'
+}
+
+jacocoTestReport {
+    dependsOn 'test'
+    finalizedBy 'jacocoTestCoverageVerification'
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/GatewayApplication.class"
+            ])
+        }))
+    }
+}
+
+jacocoTestCoverageVerification {
+    dependsOn 'jacocoTestReport'
+
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                minimum = 0.8
+            }
+        }
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/GatewayApplication.class",
+            ])
+        }))
+    }
+}
+//  TEST SETUP END
