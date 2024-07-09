@@ -1,5 +1,6 @@
 package com.inmemory.user.common.exception.handler;
 
+import com.inmemory.user.common.constants.StaticValues;
 import com.inmemory.user.common.exception.ApplicationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-
-import static com.inmemory.user.common.constants.StaticValues.HEADER_ERROR_CODE;
-import static com.inmemory.user.common.constants.StaticValues.HEADER_ERROR_MESSAGE;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
@@ -25,8 +23,8 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<?> applicationExceptionHandle(ApplicationException applicationException) {
         MultiValueMap<String, String> headers = new HttpHeaders();
-        headers.add(HEADER_ERROR_CODE, applicationException.getErrorCode());
-        headers.add(HEADER_ERROR_MESSAGE, URLEncoder.encode(applicationException.getMessage(), StandardCharsets.UTF_8));
+        headers.add(StaticValues.HEADER_ERROR_CODE, applicationException.getErrorCode());
+        headers.add(StaticValues.HEADER_ERROR_MESSAGE, URLEncoder.encode(applicationException.getMessage(), StandardCharsets.UTF_8));
         return new ResponseEntity<>(null, headers, applicationException.getHttpStatus());
     }
 }
