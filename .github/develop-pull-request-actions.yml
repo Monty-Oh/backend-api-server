@@ -1,0 +1,36 @@
+name: github-actions-develop
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      module: ${{ steps.detect.outputs.module }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Detect changed module
+        id: detect
+        run: |
+          MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo "Modified files: $MODIFIED_FILES"
+
+          MODULE=""
+          if echo "$MODIFIED_FILES" | grep -q "^module1/"; then
+            MODULE="module1"
+          elif echo "$MODIFIED_FILES" | grep -q "^module2/"; then
+            MODULE="module2"
+          fi
+
+          echo "module=$MODULE" >> $GITHUB_ENV
+          echo "::set-output name=module::$MODULE"
