@@ -1,5 +1,7 @@
 package com.inmemory.auth.common.utils;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -61,5 +63,18 @@ public class JwtUtils {
                 .signWith(jwtSecretKey)
                 .compact()
                 ;
+    }
+
+    /**
+     * 전달 받은 토큰을 파싱한다.
+     *
+     * @param token JsonWebToken
+     * @return Jws<Claims> 객체
+     */
+    public Jws<Claims> parsingToken(String token) {
+        return Jwts.parser()
+                .verifyWith(jwtSecretKey)
+                .build()
+                .parseSignedClaims(token);
     }
 }
