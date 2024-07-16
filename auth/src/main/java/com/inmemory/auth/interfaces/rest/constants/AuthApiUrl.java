@@ -11,5 +11,5 @@ public class AuthApiUrl {
     //  토큰 생성
     public static final String AUTH_CREATE_TOKEN = "/token";
 
-    public static final String AUTH_REFRESH_TOKEN = "/token/refresh";
+    public static final String AUTH_REFRESH_TOKEN = "/token";
 }

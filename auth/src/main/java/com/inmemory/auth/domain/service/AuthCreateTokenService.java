@@ -1,18 +1,23 @@
 package com.inmemory.auth.domain.service;
 
+import com.inmemory.auth.common.constants.StaticValues;
 import com.inmemory.auth.common.utils.JwtUtils;
 import com.inmemory.auth.domain.model.aggregate.Auth;
 import com.inmemory.auth.domain.model.entity.Role;
 import com.inmemory.auth.domain.model.entity.UserRole;
 import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
+import com.inmemory.auth.domain.model.vo.AuthRefreshTokenVo;
 import com.inmemory.auth.domain.repository.AuthRepository;
 import com.inmemory.auth.domain.repository.RoleRepository;
 import com.inmemory.auth.domain.repository.UserRoleRepository;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,23 +42,36 @@ public class AuthCreateTokenService {
      */
     public AuthCreateTokenVo createTokenAndSaveRefreshToken(String userNo) {
         List<String> userRoleList = this.getUserRoleList(userNo);
-        AuthCreateTokenVo authCreateTokenVo = this.createAccessTokenAndRefreshToken(userNo, userRoleList);
+
+        AuthCreateTokenVo authCreateTokenVo = AuthCreateTokenVo.builder()
+                .accessToken(jwtUtils.createAccessToken(userNo, userRoleList))
+                .refreshToken(jwtUtils.createRefreshToken(userNo))
+                .build();
         this.saveRefreshToken(userNo, authCreateTokenVo.getRefreshToken());
+
         return authCreateTokenVo;
     }
 
     /**
-     * 액세스 토큰과 리프레시 토큰을 만들어서 반환한다.
+     * 인증에 필요한 액세스 토큰과 리프레시 토큰을 발급하고, 반환한다.
+     * 리프레시 토큰을 매개변수로 전달받는다.
      *
-     * @param userNo       회원 번호
-     * @param userRoleList 해당 회원이 가지고 있는 Role
-     * @return 액세스 토큰과 리프레시 토큰이 담겨있는 Value Object
+     * @param refreshToken 새롭게 액세스토큰을 생성할 리프레시 토큰
+     * @return 액세스 토큰과 리프레시 토큰
      */
-    private AuthCreateTokenVo createAccessTokenAndRefreshToken(String userNo, List<String> userRoleList) {
-        return AuthCreateTokenVo.builder()
+    public AuthRefreshTokenVo refreshToken(String refreshToken) {
+        Jws<Claims> claimsJws = jwtUtils.parsingToken(refreshToken);
+        Date expirationDate = claimsJws.getPayload().getExpiration();
+        String userNo = (String) claimsJws.getPayload().get(StaticValues.USER_NO);
+        List<String> userRoleList = this.getUserRoleList(userNo);
+
+        AuthRefreshTokenVo authRefreshTokenVo = AuthRefreshTokenVo.builder()
                 .accessToken(jwtUtils.createAccessToken(userNo, userRoleList))
-                .refreshToken(jwtUtils.createRefreshToken(userNo))
+                .refreshToken(jwtUtils.createRefreshToken(userNo, expirationDate))
                 .build();
+        this.saveRefreshToken(userNo, authRefreshTokenVo.getRefreshToken());
+
+        return authRefreshTokenVo;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.inmemory.auth.common.utils;
 
+import com.inmemory.auth.common.constants.StaticValues;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -31,20 +32,16 @@ public class JwtUtils {
     /**
      * 액세스 토큰 생성 후 반환
      *
-     * @param userNo 회원 번호
+     * @param userNo       회원 번호
+     * @param userRoleList 유저 권한 리스트
      * @return 액세스 토큰
      */
     public String createAccessToken(String userNo, List<String> userRoleList) {
-        return Jwts.builder()
-                .claims()
-                .add("userNo", userNo)
-                .add("userRoles", userRoleList)
-                .and()
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + Duration.ofMinutes(accessTokenValidTime).toMillis()))
-                .signWith(jwtSecretKey)
-                .compact()
-                ;
+        return this.createToken(
+                userNo,
+                userRoleList,
+                new Date(System.currentTimeMillis() + Duration.ofMinutes(accessTokenValidTime).toMillis())
+        );
     }
 
     /**
@@ -54,12 +51,32 @@ public class JwtUtils {
      * @return 리프레시 토큰
      */
     public String createRefreshToken(String userNo) {
+        return this.createToken(
+                userNo,
+                null,
+                new Date(System.currentTimeMillis() + Duration.ofMinutes(refreshTokenValidTime).toMillis())
+        );
+    }
+
+    /**
+     * 리프레시 토큰 생성 후 반환
+     *
+     * @param userNo         회원 번호
+     * @param expirationDate 만료 일자
+     * @return 리프레시 토큰
+     */
+    public String createRefreshToken(String userNo, Date expirationDate) {
+        return this.createToken(userNo, null, expirationDate);
+    }
+
+    private String createToken(String userNo, List<String> userRoleList, Date expirationDate) {
         return Jwts.builder()
                 .claims()
-                .add("userNo", userNo)
+                .add(StaticValues.USER_NO, userNo)
+                .add(StaticValues.USER_ROLES, userRoleList)
                 .and()
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + Duration.ofMinutes(refreshTokenValidTime).toMillis()))
+                .expiration(expirationDate)
                 .signWith(jwtSecretKey)
                 .compact()
                 ;
