@@ -2,7 +2,6 @@
 
 import store from "@/store/index.js";
 import {ref} from "vue";
-import $store from "../store/state.js";
 
 const inputId = ref('');
 const inputPassword = ref('');
