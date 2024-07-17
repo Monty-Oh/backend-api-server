@@ -42,8 +42,8 @@ function loginButton() {
         <button @click="loginButton">로그인</button>
       </fieldset>
       <div>
-        <p>Access_Token: {{store.getters.getAccessToken()}}</p>
-        <p>Refresh_Token: {{store.getters.getRefreshToken()}}</p>
+        <p>Access_Token: {{ store.getters.getAccessToken() }}</p>
+        <p>Refresh_Token: {{ store.getters.getRefreshToken() }}</p>
       </div>
       <p>
         <a href="" target="_blank">게스트로 오셨다면?</a>
