@@ -25,19 +25,16 @@ function loginButton() {
   </header>
   <main>
     <div>
+      <v-card>test</v-card>
       <fieldset>
         <legend>
           <h2>로그인</h2>
         </legend>
         <div>
-          <h3>
-            <input v-model="inputId" placeholder="ID">
-          </h3>
+            <v-text-field label="ID" v-model="inputId"></v-text-field>
         </div>
         <div>
-          <h3>
-            <input type="password" v-model="inputPassword" placeholder="Password">
-          </h3>
+            <v-text-field label="password" v-model="inputPassword" type="password"></v-text-field>
         </div>
         <button @click="loginButton">로그인</button>
       </fieldset>
