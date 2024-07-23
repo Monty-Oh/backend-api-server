@@ -41,7 +41,8 @@ public class SpringSecurityConfig {
                                 .pathMatchers(
                                         "/user/monitor/healthcheck",
                                         "/swagger-ui",
-                                        "/user/v1/users/login"
+                                        "/user/v1/users/login",
+                                        "/auth/v1/token"
                                 ).permitAll()
 //                                .pathMatchers(
 
