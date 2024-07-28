@@ -19,53 +19,41 @@ function loginButton() {
 </script>
 
 <template>
-  <div>
-    <dialog>
-      test
-    </dialog>
-    <v-card
-        class="mx-auto pa-12 pb-8"
-        elevation="8"
-        max-width="448"
-        rounded="lg"
-    >
-      <h2>로그인</h2>
-      <div>
-        <v-text-field
-            id="text-field-id"
-            label="ID"
-            v-model="inputId"
-            density="compact"
-        />
-      </div>
-      <div>
-        <v-text-field
-            label="password"
-            v-model="inputPassword"
-            type="password"
-            density="compact"
-        />
-      </div>
-      <v-btn
-          class="mb-8"
-          color="blue"
-          size="large"
-          variant="tonal"
-          block
-          @click="loginButton"
-      >
-        로그인
-      </v-btn>
-    </v-card>
+  <header>
+    <h1>LOGIN PAGE</h1>
+    <hr>
+  </header>
+  <main>
     <div>
-      <p>Access_Token: {{ store.getters.getAccessToken() }}</p>
-      <p>Refresh_Token: {{ store.getters.getRefreshToken() }}</p>
+      <fieldset class="login_fieldset">
+        <legend>
+          <h2>로그인</h2>
+        </legend>
+        <div>
+          <h3>
+            <input v-model="inputId" placeholder="ID">
+          </h3>
+        </div>
+        <div>
+          <h3>
+            <input type="password" v-model="inputPassword" placeholder="Password">
+          </h3>
+        </div>
+        <button @click="loginButton">로그인</button>
+      </fieldset>
+      <div>
+        <p>Access_Token: {{ store.getters.getAccessToken() }}</p>
+        <p>Refresh_Token: {{ store.getters.getRefreshToken() }}</p>
+      </div>
+      <p>
+        <a href="" target="_blank">게스트로 오셨다면?</a>
+      </p>
     </div>
-    <p>
-      <a href="" target="_blank">게스트로 오셨다면?</a>
-    </p>
-  </div>
+  </main>
 </template>
 
-<style>
-</style>
+<!--<style>-->
+<!--  .login_fieldset {-->
+<!--    width: max-content;-->
+<!--  }-->
+<!--</style>-->
