@@ -4,8 +4,7 @@ import LoginPage from "@/components/LoginPage.vue";
 </script>
 
 <template>
-  <body>
   <LoginPage/>
   <DefaultFooter/>
-  </body>
 </template>
+
