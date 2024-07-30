@@ -1,10 +1,12 @@
 <script setup>
-import DefaultFooter from "@/components/common/DefaultFooter.vue";
 import LoginPage from "@/components/LoginPage.vue";
+import AppFooter from "@/components/common/AppFooter.vue";
 </script>
 
 <template>
-  <LoginPage/>
-  <DefaultFooter/>
+  <v-app>
+    <LoginPage/>
+    <AppFooter/>
+  </v-app>
 </template>
 
