@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {requestLogin} from '../../api';
-import { handleAction} from 'redux-thunk'
 
+//  API 개섡 참고: https://ko.redux.js.org/tutorials/essentials/part-5-async-logic
+//  TODO: redux-thunk? redux-saga? 뭘 쓰지?
 export const authSlice = createSlice({
     name: "token",
     initialState: {
