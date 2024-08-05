@@ -1,11 +1,12 @@
 import './App.css';
-import LoginPage from './features/auth/LoginPage';
+import Login from './features/login/Login';
+
 function App() {
-  return (
-    <div className="App">
-      <LoginPage />
-    </div>
-  );
+    return (
+        <div className="App">
+            <Login/>
+        </div>
+    );
 }
 
 export default App;

@@ -1,12 +1,10 @@
 import React, {useState} from "react";
-import cat from '../../assets/cat.jpeg'
-import './LoginPage.css';
-import {useDispatch, useSelector} from "react-redux";
-import {login} from "./authSlice";
+import './Login.css';
+import {useDispatch} from "react-redux";
+import {fetchLogin} from "./loginSlice";
+import cat from "../../assets/cat.jpeg";
 
-export default function LoginPage() {
-    const dispatch = useDispatch();
-    const accessToken = useSelector(state => state.token.accessToken);
+export default function Login() {
 
     const [loginId, setLoginId] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -22,9 +20,11 @@ export default function LoginPage() {
     }
 
     //  request Login
+    const dispatch = useDispatch();
+
     function onClickLoginButton() {
         dispatch(
-            login({
+            fetchLogin({
                 id: loginId,
                 password: loginPassword
             })
@@ -50,7 +50,7 @@ export default function LoginPage() {
                                 </div>
                                 <div className="gjs-grid-row" id="i9j0x">
                                     <div className="gjs-grid-column" id="ibuuh">
-                                        <input type="text" id="inhym" onChange={onChangeLoginPassword}/>
+                                        <input type="password" id="inhym" onChange={onChangeLoginPassword}/>
                                     </div>
                                     <div className="gjs-grid-column" id="iv3s6">
                                         <div id="itu1f">PASSWORD</div>
@@ -63,7 +63,6 @@ export default function LoginPage() {
                     <div id="iepks" className="gjs-grid-column">
                         <img src={cat} id="i466d" alt="고양이"/>
                     </div>
-                    {accessToken}
                 </div>
             </div>
         </div>
