@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {requestLogin} from "../../api/axiosClient";
+import {LOCAL_STORAGE_KEY_ACCESS_TOKEN, LOCAL_STORAGE_KEY_REFRESH_TOKEN} from "../../common/constants";
 
 //  RequestLogin
 export const fetchLogin = createAsyncThunk('data/fetchData', async ({id, password}) => {
@@ -12,13 +13,17 @@ const fetchLoginReducers = (builder) => {
         .addCase(fetchLogin.fulfilled, (state, action) => {
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            console.log(state.accessToken, state.refreshToken);
+            state.isLoggedIn = true;
+
+            localStorage.setItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN, action.payload.accessToken);
+            localStorage.setItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN, action.payload.refreshToken);
         });
 }
 
 const loginSlice = createSlice({
     name: "token",
     initialState: {
+        isLoggedIn: false,
         accessToken: "",
         refreshToken: ""
     },
