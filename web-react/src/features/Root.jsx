@@ -6,11 +6,11 @@ import {URL_LOGIN_PAGE, URL_MAIN_PAGE} from "../common/constants";
 import {useSelector} from "react-redux";
 
 function Root() {
-    const isLoggedIn = useSelector((state) => state.token.isLoggedIn);
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (!isLoggedIn) navigate(URL_LOGIN_PAGE);
-    }, [isLoggedIn, navigate])
+    // const isLoggedIn = useSelector(state => state.token.isLoggedIn);
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //     if (isLoggedIn) navigate(URL_MAIN_PAGE);
+    // }, [isLoggedIn, navigate])
 
     return (
         <Routes>
