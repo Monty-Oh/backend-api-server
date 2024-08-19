@@ -2,6 +2,7 @@ import express from "express";
 import userRouter from "./routers/user.js";
 import webRouter from "./routers/web.js";
 import {__dirname, PORT} from "./constants/system.js";
+import {URL_STATIC_ROOT} from "./constants/api.js";
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(webRouter);
 
 //  static
 app.use(
-    "/static",
+    URL_STATIC_ROOT,
     express.static(__dirname + "/src/web")
 );
 

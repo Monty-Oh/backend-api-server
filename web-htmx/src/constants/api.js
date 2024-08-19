@@ -1,5 +1,7 @@
+//  resources
+export const URL_STATIC_ROOT = "/static"
 
-//  WEB
+// web
 export const URL_WEB_ROOT = "/";
 export const URL_WEB_LOGIN = "/login";
 

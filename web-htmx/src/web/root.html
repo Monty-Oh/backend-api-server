@@ -3,5 +3,25 @@
 </div>
 
 <script>
-    console.log("test...");
+    //  localStorage 에서 token 관련 데이터들 획득
+    const LOCAL_STORAGE_KEY_ACCESS_TOKEN = "monty_web_accessToken";
+    const LOCAL_STORAGE_KEY_REFRESH_TOKEN = "monty_web_refreshToken";
+
+    const accessToken = localStorage.getItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN);
+    const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN);
+
+    //  target 컴포넌트 렌더링
+    const target = accessToken && refreshToken
+        ? "/static/main.html"
+        : "/static/login.html"
+    ;
+
+    htmx.ajax(
+        "GET",
+        target,
+        {
+            target: "#root-container",
+            swap: "innerHTML"
+        }
+    )
 </script>
