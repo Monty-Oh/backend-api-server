@@ -1,16 +1,36 @@
 import express from "express";
-import {URL_USER_MONITOR_HEALTHCHECK} from "../constants/api.js";
+import {URL_USER_REQUEST_LOGIN, URL_WEB_LOGIN} from "../constants/api.js";
+import axios from "axios";
 
 //  userRouter
 const router = express.Router();
 
 /**
- * HealthCheck
+ * 로그인 요청
  */
-router.get(
-    URL_USER_MONITOR_HEALTHCHECK,
+router.post(
+    URL_WEB_LOGIN,
     (req, res) => {
-        res.send("test");
+        const {loginId, password} = req.body;
+        axios
+            .post(URL_USER_REQUEST_LOGIN, {
+                loginId,
+                password
+            })
+            .then((response) => {
+                const {accessToken, refreshToken} = response.data;
+                res.send({
+                    accessToken, refreshToken
+                });
+            })
+            .catch((error) => {
+                const {code, message} = error.response.headers;
+                const decodedMessage = decodeURI(message).replace(/\+/g, ' ');
+                res.send({
+                    code,
+                    message: decodedMessage
+                });
+            })
     }
 )
 

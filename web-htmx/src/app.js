@@ -6,6 +6,9 @@ import {URL_STATIC_ROOT} from "./constants/api.js";
 
 const app = express();
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}));
+
 //  routers
 app.use(userRouter);
 app.use(webRouter);

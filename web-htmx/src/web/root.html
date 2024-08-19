@@ -12,8 +12,8 @@
 
     //  target 컴포넌트 렌더링
     const target = accessToken && refreshToken
-        ? "/static/main.html"
-        : "/static/login.html"
+        ? "/static/pages/main.html"
+        : "/static/pages/login.html"
     ;
 
     htmx.ajax(
@@ -21,7 +21,7 @@
         target,
         {
             target: "#root-container",
-            swap: "innerHTML"
+            swap: "outerHTML"
         }
     )
 </script>
