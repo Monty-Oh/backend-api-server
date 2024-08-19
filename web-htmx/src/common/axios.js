@@ -2,7 +2,7 @@ import axios from "axios";
 
 //  HTTP 요청 공통 설정
 const userHttpConfig = {
-    baseUrl: '',
+    baseUrl: 'http://localhost:3000',
     urls: {
         userHealthCheck: '/user/monitor/healthcheck',
         userLogin: '/user/v1/users/login',
@@ -10,16 +10,10 @@ const userHttpConfig = {
 }
 
 //  로그인 요청
-function requestLogin(loginId, password) {
-    return axios({
-        url: userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
-        method: 'post',
-        data: {
-            loginId, password
-        }
-    });
-}
-
-export {
-    requestLogin,
+export function requestLogin(loginId, password) {
+    return axios
+        .post(
+            userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
+            {loginId, password}
+        )
 }

@@ -11,13 +11,18 @@ const userHttpConfig = {
 
 //  로그인 요청
 function requestLogin(loginId, password) {
-    return axios({
-        url: userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
-        method: 'post',
-        data: {
-            loginId, password
-        }
-    });
+    return axios
+        .post(
+            userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
+            {loginId, password}
+        )
+        .catch(errorHandler);
+}
+
+const errorHandler = (error) => {
+    const {code, message} = error.response.headers;
+    const decodedMessage = decodeURI(message).replace(/\+/g, ' ');
+    alert(`[${code}] ${decodedMessage}`)
 }
 
 export {
