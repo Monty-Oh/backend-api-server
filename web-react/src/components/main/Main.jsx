@@ -5,8 +5,6 @@ export default function Main() {
     const [contentData, setContentData] = useState([]);
 
     useEffect(() => {
-        // 페이지 로드 시 API 호출 또는 데이터 가져오기
-        // 예시로 하드코딩된 데이터를 사용하겠습니다.
         const fetchData = () => {
             const data = [
                 { id: 1, tag: 'tag1', imageSrc: 'image1.jpg', order: 1 },
@@ -22,7 +20,6 @@ export default function Main() {
         fetchData();
     }, []);
 
-    // 태그별로 그룹화
     const groupedContent = contentData.reduce((acc, content) => {
         const { tag } = content;
         if (!acc[tag]) acc[tag] = [];
