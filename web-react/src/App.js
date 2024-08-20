@@ -1,6 +1,6 @@
 import './App.css';
 import React from "react";
-import Root from "./features/Root";
+import Root from "./components/Root";
 
 function App() {
     return (

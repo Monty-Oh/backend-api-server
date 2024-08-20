@@ -20,9 +20,13 @@ function requestLogin(loginId, password) {
 }
 
 const errorHandler = (error) => {
-    const {code, message} = error.response.headers;
+    let {code, message} = error.response.headers;
+    if (!(code && message)) {
+        code = "0000";
+        message = "Server Connection Error";
+    }
     const decodedMessage = decodeURI(message).replace(/\+/g, ' ');
-    alert(`[${code}] ${decodedMessage}`)
+    alert(`[${code}] ${decodedMessage}`);
 }
 
 export {

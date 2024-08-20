@@ -10,12 +10,12 @@
                 const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN);
 
                 if ((accessToken && refreshToken)) {
-                    console.log("no token found!");
+                    console.log("no auth found!");
                     htmx.ajax("GET", "/static/components/login.html", {target: "#root-container"});
 
                 }else {
                     console.log("test!!");
-                    htmx.ajax("POST", "/token/validate", {values: {token: "test"}});
+                    htmx.ajax("POST", "/auth/validate", {values: {auth: "test"}});
                     console.log("test!!");
                 }
 
@@ -24,14 +24,14 @@
     //  성공 처리
     document.body.addEventListener('htmx:afterRequest', function(event) {
         console.log(event);
-        if (event.detail.path === '/token/validate') {
+        if (event.detail.path === '/auth/validate') {
             console.log("here!!");
         }
     });
 
     //  실패 처리
     document.body.addEventListener('htmx:responseError', function(event) {
-        if (event.detail.path === '/token/validate') {
+        if (event.detail.path === '/auth/validate') {
             console.error('Token validation failed:', event.detail.xhr.responseText);
             // localStorage.removeItem('authToken');
             // htmx.ajax('GET', '/path-to-B.html', { target: '#root-container' });

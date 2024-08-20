@@ -22,11 +22,6 @@ export function requestLogin(loginId, password) {
         )
 }
 
-//  액세스 토큰 검증 요청
-export function requestValidateToken(accessToken) {
-
-}
-
 //  Default Error Handler
 export function requestErrorHandler(error) {
     const {code, message} = error.response
