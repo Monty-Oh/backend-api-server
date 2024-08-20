@@ -1,4 +1,5 @@
 import express from "express";
+import authRouter from "./routers/auth.js";
 import userRouter from "./routers/user.js";
 import webRouter from "./routers/web.js";
 import {__dirname, PORT} from "./constants/system.js";
@@ -10,6 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
 //  routers
+app.use(authRouter);
 app.use(userRouter);
 app.use(webRouter);
 
