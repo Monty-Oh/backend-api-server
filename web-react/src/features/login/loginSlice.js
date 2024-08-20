@@ -18,7 +18,7 @@ const loginSlice = createSlice({
         setTokens: (state, action) => {
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            state.isLoggedIn = true;
+            state.isLoggedIn = state.accessToken && state.refreshToken;
         }
     },
     extraReducers: (builder) => {

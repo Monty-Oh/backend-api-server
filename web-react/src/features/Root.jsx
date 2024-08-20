@@ -1,22 +1,38 @@
-import {Route, Routes, useNavigate} from "react-router-dom";
-import Main from "./main/Main";
 import Login from "./login/Login";
 import React, {useEffect} from "react";
-import {URL_LOGIN_PAGE, URL_MAIN_PAGE} from "../common/constants";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import Main from "./main/Main";
+import {LOCAL_STORAGE_KEY_ACCESS_TOKEN, LOCAL_STORAGE_KEY_REFRESH_TOKEN} from "../common/constants";
+import {setTokens} from "./login/loginSlice";
 
 function Root() {
-    // const isLoggedIn = useSelector(state => state.token.isLoggedIn);
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     if (isLoggedIn) navigate(URL_MAIN_PAGE);
-    // }, [isLoggedIn, navigate])
+    const dispatch = useDispatch();
+
+    //  최초 페이지 로딩 시 localStorage 에서 토큰을 조회한 후 state 에 저장
+    const isLoggedIn = useSelector(state => state.token.isLoggedIn);
+    useEffect(() => {
+        const accessToken = localStorage.getItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN);
+        const refreshToken = localStorage.getItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN);
+        if (accessToken && refreshToken) {
+            const tokens = {accessToken, refreshToken};
+            dispatch(setTokens(tokens));
+        }
+    }, [dispatch]);
+
+    //  토큰 값 변화 시 localStorage 에 저장
+    const accessToken = useSelector(state => state.token.accessToken);
+    const refreshToken = useSelector(state => state.token.refreshToken);
+    useEffect(() => {
+        if (accessToken && refreshToken) {
+            localStorage.setItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN, accessToken);
+            localStorage.setItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN, refreshToken);
+        }
+    }, [accessToken, refreshToken])
 
     return (
-        <Routes>
-            <Route path={URL_MAIN_PAGE} element={<Main/>}/>
-            <Route path={URL_LOGIN_PAGE} element={<Login/>}/>
-        </Routes>
+        <div>
+            {isLoggedIn ? <Main/> : <Login/>}
+        </div>
     );
 }
 
