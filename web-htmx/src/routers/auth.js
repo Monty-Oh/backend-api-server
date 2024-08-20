@@ -10,6 +10,7 @@ router.post(
     "/token/validate",
     async (req, res) => {
         const {token} = req.body;
+        res.sendStatus(405);
         // res.send("test");
     }
 )

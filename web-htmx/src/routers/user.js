@@ -1,5 +1,5 @@
 import express from "express";
-import {requestErrorHandler, requestLogin} from "../common/axios.js";
+import {requestErrorHandler, requestLogin} from "../utils/axios.js";
 
 /**
  * User 도메인으로 요청하는 Router
