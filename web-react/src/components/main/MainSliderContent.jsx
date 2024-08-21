@@ -1,11 +1,7 @@
-import React from "react";
-
-export default function MainSliderContent({imageSrc, contentId, order}) {
+export default function MainSliderContent() {
     return (
         <div>
-            {/*<img src={imageSrc} alt={`Content ${contentId}`}/>*/}
-            <p>Content ID: {contentId}</p>
-            <p>Order: {order}</p>
+            <p>main page...</p>
         </div>
     )
 }
