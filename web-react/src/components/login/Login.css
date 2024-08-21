@@ -1,9 +1,5 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
+.loading-container {
+    text-align: center;
 }
 
 .gjs-grid-column {
