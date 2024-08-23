@@ -1,7 +1,6 @@
 .img-body img {
     display: flex;
     margin: 0 auto;
-    height: 40vh;
     object-fit: cover;
     width: 100%;
     height: 100%;

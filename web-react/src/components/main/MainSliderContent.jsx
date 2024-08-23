@@ -3,9 +3,9 @@ import "./MainSliderContent.css";
 
 export default function MainSliderContent({item}) {
     return (
-        <div key={item.id}>
+        <div className="content-container">
             <div className="img-body">
-                <img src={item.src} />
+                <img src={item.src} alt={item.description}/>
             </div>
             <div>
                 <h2>{item.id}</h2>

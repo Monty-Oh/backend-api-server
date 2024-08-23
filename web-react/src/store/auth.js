@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {requestLogin} from "../common/axios";
-import {LOCAL_STORAGE_KEY_ACCESS_TOKEN, LOCAL_STORAGE_KEY_REFRESH_TOKEN} from "../common/constants";
+import {LOCAL_STORAGE_KEY_ACCESS_TOKEN, LOCAL_STORAGE_KEY_REFRESH_TOKEN, REDUX_AUTH} from "../common/constants";
 
 //  RequestLogin
 export const fetchLogin = createAsyncThunk(
@@ -12,21 +12,13 @@ export const fetchLogin = createAsyncThunk(
 );
 
 const auth = createSlice({
-    name: "auth",
+    name: REDUX_AUTH,
     initialState: {
         isLoggedIn: localStorage.getItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN) && localStorage.getItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN),
         accessToken: localStorage.getItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN) || null,
         refreshToken: localStorage.getItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN) || null
     },
-    reducers: {
-        setAuth: (state, action) => {
-            state.accessToken = action.payload.accessToken;
-            state.refreshToken = action.payload.refreshToken;
-            state.isLoggedIn = state.accessToken && state.refreshToken;
-            localStorage.setItem(LOCAL_STORAGE_KEY_ACCESS_TOKEN, state.accessToken);
-            localStorage.setItem(LOCAL_STORAGE_KEY_REFRESH_TOKEN, state.refreshToken);
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchLogin.fulfilled, (state, action) => {

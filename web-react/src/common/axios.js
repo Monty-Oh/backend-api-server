@@ -1,31 +1,20 @@
 import axios from "axios";
-
-//  HTTP 요청 공통 설정
-const userHttpConfig = {
-    baseUrl: '',
-    urls: {
-        userHealthCheck: '/user/monitor/healthcheck',
-        userLogin: '/user/v1/users/login',
-    }
-}
+import {DEFAULT_ERROR_CODE, DEFAULT_ERROR_MESSAGE} from "./constants";
+import {USER_LOGIN_URL} from "./urls";
 
 //  로그인 요청
-function requestLogin(loginId, password) {
+const requestLogin = function (loginId, password) {
     return axios
         .post(
-            userHttpConfig.baseUrl + userHttpConfig.urls.userLogin,
+            USER_LOGIN_URL,
             {loginId, password}
         )
         .catch(errorHandler);
 }
 
-const errorHandler = (error) => {
-    let {code, message} = error.response.headers;
-    if (!(code && message)) {
-        code = "0000";
-        message = "Server Connection Error";
-    }
-    const decodedMessage = decodeURI(message).replace(/\+/g, ' ');
+const errorHandler = function (error) {
+    const {code = DEFAULT_ERROR_CODE, message = DEFAULT_ERROR_MESSAGE} = error.response.headers;
+    const decodedMessage = decodeURI(message).replace(/\+/g, " ");
     alert(`[${code}] ${decodedMessage}`);
 }
 

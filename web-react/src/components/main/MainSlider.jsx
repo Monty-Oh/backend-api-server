@@ -7,12 +7,12 @@ import MainSliderContent from "./MainSliderContent";
 
 export default function MainSlider({tag, contents}) {
     const settings = {
+        arrows: true,
         dots: true,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 1,
         infinite: false,
-        centerMode: true
+        initialSlide: 0,
     };
 
     return (
