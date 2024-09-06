@@ -69,6 +69,14 @@ public class JwtUtils {
         return this.createToken(userNo, null, expirationDate);
     }
 
+    /**
+     * 토큰 생성 후 반환
+     *
+     * @param userNo         토큰 생성 요청한 회원 번호
+     * @param userRoleList   해당 회원이 가지고 있는 USER_ROLE 리스트
+     * @param expirationDate 토큰의 만료 일자
+     * @return 생성된 토큰
+     */
     private String createToken(String userNo, List<String> userRoleList, Date expirationDate) {
         return Jwts.builder()
                 .claims()
