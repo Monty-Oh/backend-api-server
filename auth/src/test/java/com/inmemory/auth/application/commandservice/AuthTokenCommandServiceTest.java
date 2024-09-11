@@ -1,7 +1,9 @@
 package com.inmemory.auth.application.commandservice;
 
 import com.inmemory.auth.domain.model.command.AuthCreateTokenCommand;
+import com.inmemory.auth.domain.model.command.AuthRefreshTokenCommand;
 import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
+import com.inmemory.auth.domain.model.vo.AuthRefreshTokenVo;
 import com.inmemory.auth.domain.service.AuthCreateTokenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,6 +47,29 @@ class AuthTokenCommandServiceTest {
         assertAll(
                 () -> assertThat(actual.getAccessToken()).isEqualTo(authCreateTokenVo.getAccessToken()),
                 () -> assertThat(actual.getRefreshToken()).isEqualTo(authCreateTokenVo.getRefreshToken())
+        );
+    }
+
+    @Test
+    @DisplayName("토큰 갱신 비즈니스 로직을 수행한다.")
+    void refreshToken() {
+        //  given
+        AuthRefreshTokenCommand authRefreshTokenCommand = AuthRefreshTokenCommand.builder()
+                .refreshToken("testRefreshToken")
+                .build();
+        AuthRefreshTokenVo authRefreshTokenVo = AuthRefreshTokenVo.builder()
+                .accessToken("resultAccessToken")
+                .refreshToken("resultRefreshToken")
+                .build();
+        given(authCreateTokenService.refreshToken(any())).willReturn(authRefreshTokenVo);
+
+        //  when
+        AuthRefreshTokenVo actual = authTokenCommandService.refreshToken(authRefreshTokenCommand);
+
+        //  then
+        assertAll(
+                () -> assertThat(actual.getAccessToken()).isEqualTo(authRefreshTokenVo.getAccessToken()),
+                () -> assertThat(actual.getRefreshToken()).isEqualTo(authRefreshTokenVo.getRefreshToken())
         );
     }
 }
