@@ -1,12 +1,12 @@
-name: build-test
+name: Pull Request Workflow (develop)
 
 on:
-  push:
+  pull_request:
     branches:
-      - features/github-actions
+      - develop
 
 jobs:
-  auth:
+  gradle-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,22 +15,19 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Gradle Build - auth
+      - name: Gradle Build (auth)
         run: |
           cd auth
           ./gradlew build
-
-      - name: Gradle Build - user
+      - name: Gradle Build (user)
         run: |
           cd user
           ./gradlew build
-
-      - name: Gradle Build - content
+      - name: Gradle Build (content)
         run: |
           cd content
           ./gradlew build
-
-      - name: Gradle Build - gateway
+      - name: Gradle Build (gateway)
         run: |
           cd gateway
           ./gradlew build
