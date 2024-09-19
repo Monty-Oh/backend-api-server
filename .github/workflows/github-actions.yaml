@@ -6,7 +6,7 @@ on:
       - features/github-actions
 
 env:
-  PROJECT_ROOT: "$GITHUB_ACTION_PATH/../../"
+  PROJECT_ROOT: ${{ $GITHUB_ACTION_PATH }}/../../
 
 jobs:
   auth:
