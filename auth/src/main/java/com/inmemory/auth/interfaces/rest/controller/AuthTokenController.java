@@ -45,10 +45,10 @@ public class AuthTokenController {
     /**
      * 토큰 갱신 API
      *
-     * @param refreshToken 토큰 갱신에 필요한 refreshToken
+     * @param refreshToken 토큰 갱신에 필요한 refreshToken (Header)
      * @return 토큰 갱신 결과
      */
-    @PutMapping(value = AuthApiUrl.AUTH_REFRESH_TOKEN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = AuthApiUrl.AUTH_REFRESH_TOKEN, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthRefreshTokenRspDto> refreshToken(@RequestHeader(CustomHeaders.REFRESH_TOKEN) String refreshToken) {
         AuthRefreshTokenCommand authRefreshTokenCommand = authRefreshTokenCommandMapper.mapToCommand(refreshToken);
         AuthRefreshTokenVo authRefreshTokenVo = authTokenCommandService.refreshToken(authRefreshTokenCommand);

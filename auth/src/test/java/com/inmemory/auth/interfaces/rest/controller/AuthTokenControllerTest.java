@@ -2,12 +2,17 @@ package com.inmemory.auth.interfaces.rest.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inmemory.auth.application.commandservice.AuthTokenCommandService;
+import com.inmemory.auth.common.constants.CustomHeaders;
 import com.inmemory.auth.domain.model.command.AuthCreateTokenCommand;
+import com.inmemory.auth.domain.model.command.AuthRefreshTokenCommand;
 import com.inmemory.auth.domain.model.vo.AuthCreateTokenVo;
+import com.inmemory.auth.domain.model.vo.AuthRefreshTokenVo;
 import com.inmemory.auth.interfaces.rest.constants.AuthApiUrl;
 import com.inmemory.auth.interfaces.rest.dto.AuthCreateTokenReqDto;
 import com.inmemory.auth.interfaces.rest.dto.AuthCreateTokenRspDto;
+import com.inmemory.auth.interfaces.rest.dto.AuthRefreshTokenRspDto;
 import com.inmemory.auth.interfaces.rest.mapper.AuthCreateTokenCommandMapper;
+import com.inmemory.auth.interfaces.rest.mapper.AuthRefreshTokenCommandMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +40,9 @@ class AuthTokenControllerTest {
 
     @MockBean
     private AuthCreateTokenCommandMapper authCreateTokenCommandMapper;
+
+    @MockBean
+    private AuthRefreshTokenCommandMapper authRefreshTokenCommandMapper;
 
     @Test
     @DisplayName("토큰 생성 요청을 했고 성공 응답이 왔다.")
@@ -70,5 +78,42 @@ class AuthTokenControllerTest {
                 .andExpect(content().string(objectMapper.writeValueAsString(authCreateTokenRspDto)))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         ;
+    }
+
+    @Test
+    @DisplayName("토큰 갱신 요청을 했고 성공 응답이 왔다.")
+    void refreshToken_success() throws Exception {
+        //  given
+        String inputRefreshToken = "inputRefreshToken";
+        AuthRefreshTokenCommand authRefreshTokenCommand = AuthRefreshTokenCommand.builder()
+                .refreshToken(inputRefreshToken)
+                .build();
+        given(authRefreshTokenCommandMapper.mapToCommand(any())).willReturn(authRefreshTokenCommand);
+
+        String outputAccessToken = "outputAccessToken";
+        String outputRefreshToken = "outputRefreshToken";
+        AuthRefreshTokenVo authRefreshTokenVo = AuthRefreshTokenVo
+                .builder()
+                .accessToken(outputAccessToken)
+                .refreshToken(outputRefreshToken)
+                .build();
+        given(authTokenCommandService.refreshToken(any())).willReturn(authRefreshTokenVo);
+
+        AuthRefreshTokenRspDto authRefreshTokenRspDto = AuthRefreshTokenRspDto
+                .builder()
+                .accessToken(outputAccessToken)
+                .refreshToken(outputRefreshToken)
+                .build();
+        given(authRefreshTokenCommandMapper.mapToRspDto(any())).willReturn(authRefreshTokenRspDto);
+
+        //  when,   then
+        mockMvc.perform(
+                MockMvcRequestBuilders.put(AuthApiUrl.AUTH_V1_BASE_URL + AuthApiUrl.AUTH_REFRESH_TOKEN)
+                        .header(CustomHeaders.REFRESH_TOKEN, inputRefreshToken)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().string(objectMapper.writeValueAsString(authRefreshTokenRspDto)))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                ;
     }
 }
