@@ -5,9 +5,6 @@ on:
     branches:
       - features/github-actions
 
-env:
-  PROJECT_ROOT: ${{ github.action_path }}/../../
-
 jobs:
   auth:
     runs-on: ubuntu-latest
