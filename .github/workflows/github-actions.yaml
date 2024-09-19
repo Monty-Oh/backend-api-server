@@ -20,9 +20,8 @@ jobs:
           distribution: 'temurin'
       - name: Gradle Build
         run: |
-          cd auth
-          ./gradlew build
-          
           echo "$PROJECT_ROOT"
+#          cd auth
+#          ./gradlew build
             
 
