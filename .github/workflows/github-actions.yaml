@@ -5,6 +5,9 @@ on:
     branches:
       - features/github-actions
 
+env:
+  PROJECT_ROOT: "$GITHUB_ACTION_PATH/../../"
+
 jobs:
   auth:
     runs-on: ubuntu-latest
@@ -19,5 +22,7 @@ jobs:
         run: |
           cd auth
           ./gradlew build
+          
+          echo "$PROJECT_ROOT"
             
 
