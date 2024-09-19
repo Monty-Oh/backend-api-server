@@ -18,10 +18,22 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Gradle Build
+      - name: Gradle Build - auth
         run: |
-          echo "$PROJECT_ROOT"
-#          cd auth
-#          ./gradlew build
-            
+          cd auth
+          ./gradlew build
 
+      - name: Gradle Build - user
+        run: |
+          cd user
+          ./gradlew build
+
+      - name: Gradle Build - content
+        run: |
+          cd content
+          ./gradlew build
+
+      - name: Gradle Build - gateway
+        run: |
+          cd gateway
+          ./gradlew build
