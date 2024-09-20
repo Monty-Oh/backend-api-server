@@ -4,8 +4,7 @@ CREATE TABLE content_album
     image_path          varchar(255) NOT NULL comment '이미지 경로',
     content_name        varchar(100) NOT NULL comment '콘텐츠 이름',
     content_description text         NOT NULL comment '콘텐츠 설명',
-    tags                json comment '태그 리스트 (JSON 형식)',
 
     PRIMARY KEY (content_no),
-    FOREIGN KEY (content_no) REFERENCES content (content_no)
+    FOREIGN KEY (content_no) REFERENCES content (content_no) ON DELETE CASCADE
 ) comment '앨범 컨텐츠';
