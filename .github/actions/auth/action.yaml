@@ -1,10 +1,11 @@
 name: Build Auth Workflow
 
 on:
-  inputs:
-    target_module:
-      required: true
-      type: string
+  workflow_call:
+    inputs:
+      target_module:
+        required: true
+        type: string
 
 jobs:
   gradle-build:
@@ -18,5 +19,5 @@ jobs:
           distribution: 'temurin'
       - name: Gradle Build (auth)
         run: |
-          cd ${{ target_module }}
+          cd ${{ inputs.target_module }}
           ./gradlew build
