@@ -1,11 +1,9 @@
 name: Build Auth Workflow
 
-on:
-  workflow_call:
-    inputs:
-      target_module:
-        required: true
-        type: string
+inputs:
+  target_module:
+    required: true
+    type: string
 
 jobs:
   gradle-build:
