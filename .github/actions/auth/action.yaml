@@ -11,7 +11,7 @@ jobs:
   gradle-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -19,6 +19,6 @@ jobs:
           distribution: 'temurin'
       - name: Gradle Build (auth)
         run: |
-          echo ${{ github.event.inputs.target_module }}
-          cd ${{ github.event.inputs.target_module }}
+          echo ${{ inputs.target_module }}
+          cd ${{ inputs.target_module }}
           ./gradlew build
