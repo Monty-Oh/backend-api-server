@@ -19,6 +19,6 @@ jobs:
           distribution: 'temurin'
       - name: Gradle Build (auth)
         run: |
-          echo ${{ inputs.target_module }}
-          cd ${{ inputs.target_module }}
+          echo ${{ github.event.inputs.target_module }}
+          cd ${{ github.event.inputs.target_module }}
           ./gradlew build
