@@ -15,8 +15,9 @@ runs:
       with:
         java-version: '17'
         distribution: 'temurin'
+    - name: input test
+      run: echo ${{ inputs.target_module }}
     - name: Gradle Build (auth)
       run: |
-        echo ${{ inputs.target_module }}
         cd ${{ inputs.target_module }}
         ./gradlew build
