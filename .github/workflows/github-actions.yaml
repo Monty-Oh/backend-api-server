@@ -9,9 +9,10 @@ jobs:
   use-github-actions-auth:
     runs-on: ubuntu-latest
     steps:
-        - name: My first step - check out repository
-          uses: actions/checkout@v4
-        - name: auth build
-          uses: ./.github/actions/auth
-          with:
-            target_module: "auth"
+      - name: My first step - check out repository
+        uses: actions/checkout@v4
+
+      - name: Build auth module
+        uses: ./.github/actions/auth
+        with:
+          target_module: "auth"
