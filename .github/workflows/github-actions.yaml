@@ -7,6 +7,6 @@ on:
 
 jobs:
   use-github-actions-auth:
-    uses: ./.github/github-actions-auth.yaml
+    uses: ./.github/workflows/github-actions-auth.yaml
     with:
       target_module: "auth"
