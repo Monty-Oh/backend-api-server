@@ -6,28 +6,32 @@ on:
       - develop
 
 jobs:
-  gradle-build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Gradle Build (auth)
-        run: |
-          cd auth
-          ./gradlew build
-      - name: Gradle Build (user)
-        run: |
-          cd user
-          ./gradlew build
-      - name: Gradle Build (content)
-        run: |
-          cd content
-          ./gradlew build
-      - name: Gradle Build (gateway)
-        run: |
-          cd gateway
-          ./gradlew build
+  use-github-actions-auth:
+    uses: ./.github/github-actions-auth.yaml
+    with:
+      target_module: "auth"
+#  gradle-build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'temurin'
+#      - name: Gradle Build (auth)
+#        run: |
+#          cd auth
+#          ./gradlew build
+#      - name: Gradle Build (user)
+#        run: |
+#          cd user
+#          ./gradlew build
+#      - name: Gradle Build (content)
+#        run: |
+#          cd content
+#          ./gradlew build
+#      - name: Gradle Build (gateway)
+#        run: |
+#          cd gateway
+#          ./gradlew build
