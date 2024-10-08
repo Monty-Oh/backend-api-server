@@ -11,8 +11,7 @@ jobs:
     steps:
       - name: My first step - check out repository
         uses: actions/checkout@v4
-
-      - name: Build auth module
+      - name: auth build
         uses: ./.github/actions/auth
         with:
           target_module: "auth"
