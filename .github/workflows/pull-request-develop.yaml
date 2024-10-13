@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  use-github-actions-auth:
+  build_modules:
     runs-on: ubuntu-latest
     steps:
       - name: My first step - check out repository
