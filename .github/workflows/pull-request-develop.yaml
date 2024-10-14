@@ -1,0 +1,29 @@
+name: Pull Request Workflow (develop)
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build_modules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v4
+      - name: auth build
+        uses: ./.github/actions/build
+        with:
+          target: auth
+      - name: content build
+        uses: ./.github/actions/build
+        with:
+          target: content
+      - name: user build
+        uses: ./.github/actions/build
+        with:
+          target: user
+      - name: gateway build
+        uses: ./.github/actions/build
+        with:
+          target: gateway
