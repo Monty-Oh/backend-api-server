@@ -9,7 +9,7 @@ group = 'com.inemory'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '21'
+    sourceCompatibility = '19'
 }
 
 repositories {
@@ -106,7 +106,7 @@ test {
 }
 //  TEST SETUP END
 
-tasks.register('buildLocalSetup', Exec) {
+tasks.register('LOCAL_DATABASE_SETUP', Exec) {
     description 'build local develop setup on docker'
     commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'inmemory-local', 'up', '-d'
     group 'build setup'
