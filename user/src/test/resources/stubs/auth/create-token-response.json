@@ -1,0 +1,17 @@
+{
+  "request": {
+    "urlPathPattern": "POST",
+    "url": "/auth/v1/token"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "accessToken": "testAccessToken",
+      "refreshToken": "testRefreshToken"
+    },
+    "headers": {
+      "Content-Type": "application/json",
+      "resultCode": "0000"
+    }
+  }
+}
