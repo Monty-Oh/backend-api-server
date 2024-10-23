@@ -1,20 +1,19 @@
-package com.inmemory.user.integrationTest;
+package com.inmemory.user.integration;
 
 import com.inmemory.user.interfaces.rest.constants.UserApiUrl;
 import com.inmemory.user.interfaces.rest.dto.UserLoginReqDto;
 import com.inmemory.user.interfaces.rest.dto.UserLoginRspDto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserControllerTest extends WireMockServerTest {
 

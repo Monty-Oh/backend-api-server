@@ -1,4 +1,4 @@
-package com.inmemory.user.integrationTest;
+package com.inmemory.user.integration;
 
 import com.inmemory.user.common.utils.EncryptUtil;
 import com.inmemory.user.domain.model.aggregate.User;
@@ -26,9 +26,9 @@ public class WireMockServerTest {
     /**
      * DB에 UserData 세팅
      *
-     * @param userNo    회원 번호
-     * @param loginId   로그인 ID
-     * @param password  비밀번호
+     * @param userNo   회원 번호
+     * @param loginId  로그인 ID
+     * @param password 비밀번호
      */
     protected void insertUserData(String userNo, String loginId, String password) {
         String encryptedPassword = EncryptUtil.encode(password);
