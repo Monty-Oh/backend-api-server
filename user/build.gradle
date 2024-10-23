@@ -61,6 +61,13 @@ dependencyManagement {
 }
 
 //  TEST SETUP
+test {
+    outputs.upToDateWhen {false}
+    useJUnitPlatform()
+    systemProperty('spring.profiles.active', 'unit-test')
+    finalizedBy('jacocoTestReport')
+}
+
 jacoco {
     toolVersion = '0.8.11'
 }
@@ -97,12 +104,6 @@ jacocoTestCoverageVerification {
             ])
         }))
     }
-}
-
-test {
-    useJUnitPlatform()
-    systemProperty('spring.profiles.active', 'unit-test')
-    finalizedBy('jacocoTestReport')
 }
 //  TEST SETUP END
 

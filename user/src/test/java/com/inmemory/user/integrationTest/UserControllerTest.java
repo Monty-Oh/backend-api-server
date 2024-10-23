@@ -44,4 +44,27 @@ public class UserControllerTest extends WireMockServerTest {
                 () -> assertTrue(actual.map(UserLoginRspDto::getRefreshToken).isPresent())
         );
     }
+
+    @Test
+    @DisplayName("로그인 요청을 했고, 없는 회원이라고 응답을 받는다.")
+    void login_fail() {
+        //  given
+        String loginId = "testLoginId";
+        String password = "testPassword";
+
+        UserLoginReqDto userLoginReqDto = UserLoginReqDto.builder()
+                .loginId(loginId)
+                .password(password)
+                .build();
+        HttpEntity<UserLoginReqDto> requestHttpEntity = new HttpEntity<>(userLoginReqDto);
+
+        //  when
+        ResponseEntity<UserLoginRspDto> responseEntity = restTemplate.postForEntity(UserApiUrl.USER_V1_BASE_URL + UserApiUrl.LOGIN_URL, requestHttpEntity, UserLoginRspDto.class);
+        Optional<UserLoginRspDto> actual = Optional.ofNullable(responseEntity.getBody());
+
+        //  then
+        assertAll(
+                () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND)
+        );
+    }
 }
