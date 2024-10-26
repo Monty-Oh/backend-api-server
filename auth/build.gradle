@@ -21,6 +21,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+    testImplementation 'com.github.codemonstur:embedded-redis:1.4.3'
 
     //  lombok
     compileOnly 'org.projectlombok:lombok'
