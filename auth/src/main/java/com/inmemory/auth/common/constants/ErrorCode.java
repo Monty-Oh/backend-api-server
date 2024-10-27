@@ -1,4 +1,4 @@
-package com.inmemory.user.common.constants;
+package com.inmemory.auth.common.constants;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,7 @@ public enum ErrorCode {
     TOKEN_EXPIRED_ERROR("0102", "토큰 정보가 만료되었습니다.", HttpStatus.UNAUTHORIZED),
     TOKEN_STATUS_ERROR("0103", "토큰 정보가 잘못되었습니다.", HttpStatus.BAD_REQUEST),
     TOKEN_NOT_FOUND_ERROR("0104", "토큰 정보가 존재하지 않습니다.", HttpStatus.UNAUTHORIZED),
+    NOT_FOUND_AUTH_INFO("0105", "해당 회원의 권한 정보가 존재하지 않습니다.", HttpStatus.NOT_FOUND),
 
     //  회원 정보 에러
     NOT_FOUND_USER_INFO("0301", "사용자 정보를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),

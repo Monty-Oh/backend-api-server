@@ -1,6 +1,8 @@
 package com.inmemory.auth.domain.service;
 
+import com.inmemory.auth.common.constants.ErrorCode;
 import com.inmemory.auth.common.constants.StaticValues;
+import com.inmemory.auth.common.exception.ApplicationException;
 import com.inmemory.auth.common.utils.JwtUtils;
 import com.inmemory.auth.domain.model.aggregate.Auth;
 import com.inmemory.auth.domain.model.entity.Role;
@@ -42,7 +44,9 @@ public class AuthCreateTokenService {
      */
     public AuthCreateTokenVo createTokenAndSaveRefreshToken(String userNo) {
         List<String> userRoleList = this.getUserRoleList(userNo);
-
+        if (userRoleList.isEmpty()) {
+            throw  new ApplicationException(ErrorCode.NOT_FOUND_AUTH_INFO);
+        }
         AuthCreateTokenVo authCreateTokenVo = AuthCreateTokenVo.builder()
                 .accessToken(jwtUtils.createAccessToken(userNo, userRoleList))
                 .refreshToken(jwtUtils.createRefreshToken(userNo))
@@ -81,10 +85,10 @@ public class AuthCreateTokenService {
      * @param refreshToken 만들어진 리프레시 토큰
      */
     private void saveRefreshToken(String userNo, String refreshToken) {
-        Auth auth = authRepository.findByUserNo(userNo)
-                .orElse(
-                        new Auth(userNo, Duration.ofMinutes(refreshKeyTtl))
-                );
+        Auth auth = authRepository
+                .findByUserNo(userNo)
+                .orElse(new Auth(userNo, Duration.ofMinutes(refreshKeyTtl)))
+                ;
         auth.changeRefreshToken(refreshToken);
         authRepository.save(auth);
     }

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "urlPathPattern": "POST",
+    "url": "/auth/v1/token",
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "userNo": "0000"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "accessToken": "testAccessTokenSuccess",
+      "refreshToken": "testRefreshTokenSuccess"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

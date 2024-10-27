@@ -9,7 +9,7 @@ group = 'com.inemory'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = '19'
 }
 
 repositories {
@@ -43,6 +43,9 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
+    //  Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     //  feign
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
 }
@@ -58,6 +61,13 @@ dependencyManagement {
 }
 
 //  TEST SETUP
+test {
+    outputs.upToDateWhen {false}
+    useJUnitPlatform()
+    systemProperty('spring.profiles.active', 'unit-test')
+    finalizedBy('jacocoTestReport')
+}
+
 jacoco {
     toolVersion = '0.8.11'
 }
@@ -95,15 +105,9 @@ jacocoTestCoverageVerification {
         }))
     }
 }
-
-test {
-    useJUnitPlatform()
-    systemProperty('spring.profiles.active', 'unit-test')
-    finalizedBy('jacocoTestReport')
-}
 //  TEST SETUP END
 
-tasks.register('buildLocalSetup', Exec) {
+tasks.register('LOCAL_DATABASE_SETUP', Exec) {
     description 'build local develop setup on docker'
     commandLine 'docker-compose', '-f', "${projectDir}/src/main/resources/db/docker-compose.yaml", '-p', 'inmemory-local', 'up', '-d'
     group 'build setup'
