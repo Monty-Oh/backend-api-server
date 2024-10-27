@@ -16,5 +16,5 @@ runs:
     - name: Gradle Build (${{ inputs.target }})
       run: |
         cd ${{ inputs.target }}
-        ./gradlew build --debug
+        ./gradlew build --info
       shell: bash
