@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWireMock(stubs = "classpath:/stubs/**/*.json")
-@ActiveProfiles("unit-test")
+@ActiveProfiles("test")
 public class WireMockServerTest {
 
     @Autowired

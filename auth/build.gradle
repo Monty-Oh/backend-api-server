@@ -71,7 +71,7 @@ dependencyManagement {
 test {
     outputs.upToDateWhen {false}
     useJUnitPlatform()
-    systemProperty('spring.profiles.active', 'unit-test')
+    systemProperty('spring.profiles.active', 'test')
     finalizedBy('jacocoTestReport')
 }
 

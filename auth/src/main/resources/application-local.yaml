@@ -1,0 +1,23 @@
+# local 용 Spring Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    redis:
+      host: localhost
+      port: 16379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/auth
+    username: auth
+    password: welcome
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  flyway:
+    enabled: true
+    validate-migration-naming: true
+server:
+  port: 8081
