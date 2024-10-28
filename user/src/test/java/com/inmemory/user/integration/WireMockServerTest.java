@@ -13,8 +13,8 @@ import org.springframework.test.context.ActiveProfiles;
  * IntegrationTest 를 위한 공통 WireMockServer 세팅 클래스
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWireMock(port = 8080, stubs = "classpath:/stubs/**/*.json")
-@ActiveProfiles("unit-test")
+@AutoConfigureWireMock(stubs = "classpath:/stubs/**/*.json")
+@ActiveProfiles("test")
 public class WireMockServerTest {
 
     @Autowired
