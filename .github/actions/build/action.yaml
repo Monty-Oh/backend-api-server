@@ -8,13 +8,13 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up JDK 17
+    - name: Set up JDK 19
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '19'
         distribution: 'temurin'
     - name: Gradle Build (${{ inputs.target }})
       run: |
         cd ${{ inputs.target }}
-        ./gradlew build
+        ./gradlew build --info
       shell: bash

@@ -4,7 +4,7 @@ spring:
     group:
       local:
         - common
-      unit-test:
+      test:
         - common
       develop:
         - common
@@ -19,48 +19,3 @@ spring:
     enabled: false
 server:
   port: 8080
-
----
-# local 용 Spring Profile
-spring:
-  config:
-    activate:
-      on-profile: local
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:23306/content
-    username: content
-    password: welcome
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    show-sql: true
-  flyway:
-    enabled: true
-    validate-migration-naming: true
-server:
-  port: 8082
-
----
-# unit-test 용 Spring Profile
-spring:
-  config:
-    activate:
-      on-profile: unit-test
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: "jdbc:h2:mem:./data/localdb;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;TIME ZONE=Asia/Seoul"
-    username: sa
-    password:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
----
-# develop 용 Spring Profile
-spring:
-  config:
-    activate:
-      on-profile: develop
-## 홈서버 환경에 맞게 작성할 것
