@@ -1,4 +1,4 @@
-package com.inmemory.content.domain.entity;
+package com.inmemory.content.domain.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

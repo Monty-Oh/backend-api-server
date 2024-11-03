@@ -1,6 +1,6 @@
-package com.inmemory.content.domain.aggregate;
+package com.inmemory.content.domain.model.aggregate;
 
-import com.inmemory.content.domain.entity.Tag;
+import com.inmemory.content.domain.model.entity.Tag;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,19 +15,18 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Content {
 
     @Id
+    @Column(name = "content_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contentId;
-
-    @Column(name = "content_no")
-    private String contentNo;
 
     @ManyToMany
     @JoinTable(
             name = "content_tag",
-            joinColumns = @JoinColumn(name = "content_no", referencedColumnName = "content_no"),
+            joinColumns = @JoinColumn(name = "content_id", referencedColumnName = "content_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "tag_id")
     )
     private Set<Tag> tags;

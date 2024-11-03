@@ -1,6 +1,6 @@
 package com.inmemory.content.domain.repository;
 
-import com.inmemory.content.domain.aggregate.Content;
+import com.inmemory.content.domain.model.aggregate.Content;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,12 @@ class ContentRepositoryTest {
     void content_get_success() {
         //  given
         Content content = Content.builder()
-                .contentNo("testContentNo")
+                .contentId(1L)
                 .build();
         contentRepository.save(content);
 
         //  when
-        Optional<Content> result = contentRepository.findByContentNo(content.getContentNo());
+        Optional<Content> result = contentRepository.findByContentId(content.getContentId());
 
         //  then
         assertTrue(result.isPresent());
