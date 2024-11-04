@@ -2,8 +2,10 @@ package com.inmemory.content.interfaces.rest.controller;
 
 import com.inmemory.content.application.queryservice.AlbumListQueryService;
 import com.inmemory.content.domain.model.aggregate.Album;
+import com.inmemory.content.domain.model.dto.AlbumListDto;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.interfaces.rest.constants.ContentApiUrl;
+import com.inmemory.content.interfaces.rest.dto.AlbumListRspDto;
 import com.inmemory.content.interfaces.rest.mapper.AlbumListQueryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,10 +31,10 @@ public class AlbumController {
      * @return 조회 결과
      */
     @GetMapping(ContentApiUrl.ALBUM_LIST)
-    public ResponseEntity<Object> getAlbumList(@RequestParam(value = "tag") List<String> tagList) {
+    public ResponseEntity<AlbumListRspDto> getAlbumList(@RequestParam(value = "tag") List<String> tagList) {
         AlbumListQuery albumListQuery = albumListQueryMapper.mapToQuery(tagList);
-        List<Album> albumList = albumListQueryService.getAlbumList(albumListQuery);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        AlbumListDto albumListDto = albumListQueryService.getAlbumList(albumListQuery);
+        AlbumListRspDto albumListRspDto = albumListQueryMapper.mapToRspDto(albumListDto);
+        return new ResponseEntity<>(albumListRspDto, HttpStatus.OK);
     }
 }
