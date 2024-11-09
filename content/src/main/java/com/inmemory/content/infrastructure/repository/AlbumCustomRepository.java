@@ -1,6 +1,7 @@
-package com.inmemory.content.domain.repository;
+package com.inmemory.content.infrastructure.repository;
 
 import com.inmemory.content.domain.model.aggregate.Album;
+import com.inmemory.content.domain.model.entity.Tag;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface AlbumCustomRepository {
      * @param tagList 태그 리스트
      * @return 앨범 조회 결과
      */
-    List<Album> findByTagList(List<String> tagList);
+    List<Album> findByTagList(List<Tag> tagList);
 }

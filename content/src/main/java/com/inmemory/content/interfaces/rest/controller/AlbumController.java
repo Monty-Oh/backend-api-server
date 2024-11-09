@@ -31,7 +31,7 @@ public class AlbumController {
      * @return 조회 결과
      */
     @GetMapping(ContentApiUrl.ALBUM_LIST)
-    public ResponseEntity<AlbumListRspDto> getAlbumList(@RequestParam(value = "tag") List<String> tagList) {
+    public ResponseEntity<AlbumListRspDto> getAlbumList(@RequestParam(value = "tag", required = false) List<String> tagList) {
         AlbumListQuery albumListQuery = albumListQueryMapper.mapToQuery(tagList);
         AlbumListDto albumListDto = albumListQueryService.getAlbumList(albumListQuery);
         AlbumListRspDto albumListRspDto = albumListQueryMapper.mapToRspDto(albumListDto);
