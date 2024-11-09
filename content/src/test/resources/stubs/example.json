@@ -1,0 +1,19 @@
+{
+  "request": {
+    "urlPathPattern": "POST",
+    "url": "/content/v1/album",
+    "bodyPatterns": [
+      {
+        "equalToJson": {
+          "userNo": "0000"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
