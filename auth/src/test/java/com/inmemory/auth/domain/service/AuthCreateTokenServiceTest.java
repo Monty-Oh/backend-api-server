@@ -63,6 +63,11 @@ class AuthCreateTokenServiceTest {
     @DisplayName("액세스 토큰 발급에 성공한다.")
     void createTokenAndSaveRefreshToken_success() {
         //  given
+        Role role = Role.builder()
+                .id(0)
+                .name("ROLE_TEST")
+                .build();
+
         List<UserRole> userRoleList = List.of(
                 UserRole.builder()
                         .userRoleId(
@@ -71,16 +76,11 @@ class AuthCreateTokenServiceTest {
                                         .userNo("0")
                                         .build()
                         )
+                        .role(role)
                         .build()
         );
         given(userRoleRepository.findByUserRoleIdUserNo(anyString())).willReturn(userRoleList);
-        List<Role> roleList = List.of(
-                Role.builder()
-                        .id(0)
-                        .name("ROLE_TEST")
-                        .build()
-        );
-        given(roleRepository.findByIdIn(anyList())).willReturn(roleList);
+        given(roleRepository.findAllByIdIn(anyList())).willReturn(List.of(role));
 
         String accessToken = "TEST_ACCESS_TOKEN";
         String refreshToken = "TEST_REFRESH_TOKEN";
@@ -119,6 +119,10 @@ class AuthCreateTokenServiceTest {
                 .parseSignedClaims(parameterRefreshToken);
         given(jwtUtils.parsingToken(any())).willReturn(claimsJws);
 
+        Role role = Role.builder()
+                .id(0)
+                .name("ROLE_TEST")
+                .build();
         List<UserRole> userRoleList = List.of(
                 UserRole.builder()
                         .userRoleId(
@@ -127,16 +131,11 @@ class AuthCreateTokenServiceTest {
                                         .userNo(userNo)
                                         .build()
                         )
+                        .role(role)
                         .build()
         );
         given(userRoleRepository.findByUserRoleIdUserNo(anyString())).willReturn(userRoleList);
-        List<Role> roleList = List.of(
-                Role.builder()
-                        .id(0)
-                        .name("ROLE_TEST")
-                        .build()
-        );
-        given(roleRepository.findByIdIn(anyList())).willReturn(roleList);
+        given(roleRepository.findAllByIdIn(anyList())).willReturn(List.of(role));
 
         String accessToken = Jwts.builder()
                 .claims()

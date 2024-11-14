@@ -1,4 +1,4 @@
-package com.inmemory.auth.infrastructure.repository;
+package com.inmemory.auth.infrastructure.repository.redis;
 
 import com.inmemory.auth.domain.model.aggregate.Auth;
 import com.inmemory.auth.domain.repository.AuthRepository;

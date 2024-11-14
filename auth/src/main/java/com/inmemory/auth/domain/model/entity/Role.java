@@ -1,12 +1,13 @@
 package com.inmemory.auth.domain.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -17,9 +18,13 @@ import lombok.NoArgsConstructor;
 public class Role {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
     private String description;
+
+//    @OneToMany(mappedBy = "role")
+//    private List<UserRole> userRoleIdList;
 }
