@@ -1,12 +1,13 @@
-package com.inmemory.user.infrastructure.feign;
+package com.inmemory.user.infrastructure.repository;
 
 import com.inmemory.user.common.constants.ErrorCode;
 import com.inmemory.user.common.exception.ApplicationException;
 import com.inmemory.user.domain.model.vo.AuthCreateTokenVo;
 import com.inmemory.user.domain.repository.AuthRepository;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
-import com.inmemory.user.infrastructure.feign.mapper.AuthCreateTokenMapper;
+import com.inmemory.user.infrastructure.repository.feign.AuthFeignClient;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenReqDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.mapper.AuthCreateTokenMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

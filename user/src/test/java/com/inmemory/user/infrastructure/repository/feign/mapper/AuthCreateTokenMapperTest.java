@@ -1,8 +1,9 @@
-package com.inmemory.user.infrastructure.feign.mapper;
+package com.inmemory.user.infrastructure.repository.feign.mapper;
 
 import com.inmemory.user.domain.model.vo.AuthCreateTokenVo;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenReqDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.mapper.AuthCreateTokenMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

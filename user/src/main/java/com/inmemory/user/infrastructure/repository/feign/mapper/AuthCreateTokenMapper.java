@@ -1,9 +1,9 @@
-package com.inmemory.user.infrastructure.feign.mapper;
+package com.inmemory.user.infrastructure.repository.feign.mapper;
 
 import com.inmemory.user.common.configuration.MapStructConfig;
 import com.inmemory.user.domain.model.vo.AuthCreateTokenVo;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenReqDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenRspDto;
 import org.mapstruct.Mapper;
 
 @Mapper(config = MapStructConfig.class)

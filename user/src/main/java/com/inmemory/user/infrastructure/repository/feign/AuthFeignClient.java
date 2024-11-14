@@ -1,9 +1,9 @@
-package com.inmemory.user.infrastructure.feign;
+package com.inmemory.user.infrastructure.repository.feign;
 
 import com.inmemory.user.common.configuration.FeignConfig;
-import com.inmemory.user.infrastructure.feign.constants.AuthUrl;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.constants.AuthUrl;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenReqDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenRspDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

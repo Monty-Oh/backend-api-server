@@ -1,10 +1,11 @@
-package com.inmemory.user.infrastructure.feign;
+package com.inmemory.user.infrastructure.repository;
 
 import com.inmemory.user.common.constants.ErrorCode;
 import com.inmemory.user.common.exception.ApplicationException;
 import com.inmemory.user.domain.model.vo.AuthCreateTokenVo;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
-import com.inmemory.user.infrastructure.feign.mapper.AuthCreateTokenMapper;
+import com.inmemory.user.infrastructure.repository.feign.AuthFeignClient;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.mapper.AuthCreateTokenMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

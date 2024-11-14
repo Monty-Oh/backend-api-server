@@ -1,11 +1,11 @@
-package com.inmemory.user.infrastructure.feign;
+package com.inmemory.user.infrastructure.repository.feign;
 
 import com.github.tomakehurst.wiremock.http.RequestMethod;
 import com.inmemory.user.common.constants.ErrorCode;
 import com.inmemory.user.common.exception.ApplicationException;
-import com.inmemory.user.infrastructure.feign.constants.AuthUrl;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenReqDto;
-import com.inmemory.user.infrastructure.feign.dto.AuthCreateTokenRspDto;
+import com.inmemory.user.infrastructure.repository.feign.constants.AuthUrl;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenReqDto;
+import com.inmemory.user.infrastructure.repository.feign.dto.AuthCreateTokenRspDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.inmemory.user.infrastructure.feign;
+package com.inmemory.user.infrastructure.repository.feign;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.inmemory.user.infrastructure.feign.constants;
+package com.inmemory.user.infrastructure.repository.feign.constants;
 
 public class AuthUrl {
 

@@ -1,4 +1,4 @@
-package com.inmemory.user.infrastructure.feign.dto;
+package com.inmemory.user.infrastructure.repository.feign.dto;
 
 import lombok.Builder;
 import lombok.Getter;
