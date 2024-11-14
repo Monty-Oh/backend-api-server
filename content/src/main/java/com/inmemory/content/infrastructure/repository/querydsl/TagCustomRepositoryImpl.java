@@ -1,4 +1,4 @@
-package com.inmemory.content.infrastructure.repository;
+package com.inmemory.content.infrastructure.repository.querydsl;
 
 import com.inmemory.content.domain.model.entity.Tag;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -12,7 +12,7 @@ import static com.inmemory.content.domain.model.entity.QTag.tag;
 @Repository
 public class TagCustomRepositoryImpl extends QuerydslRepositorySupport implements TagCustomRepository {
 
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     public TagCustomRepositoryImpl(JPAQueryFactory queryFactory) {
         super(Tag.class);

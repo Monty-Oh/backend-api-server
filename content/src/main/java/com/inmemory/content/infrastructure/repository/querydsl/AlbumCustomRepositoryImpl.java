@@ -1,4 +1,4 @@
-package com.inmemory.content.infrastructure.repository;
+package com.inmemory.content.infrastructure.repository.querydsl;
 
 import com.inmemory.content.domain.model.aggregate.Album;
 import com.inmemory.content.domain.model.entity.Tag;
@@ -13,7 +13,7 @@ import static com.inmemory.content.domain.model.aggregate.QAlbum.album;
 @Repository
 public class AlbumCustomRepositoryImpl extends QuerydslRepositorySupport implements AlbumCustomRepository {
 
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     public AlbumCustomRepositoryImpl(JPAQueryFactory queryFactory) {
         super(Album.class);

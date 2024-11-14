@@ -1,4 +1,4 @@
-package com.inmemory.content.infrastructure.repository;
+package com.inmemory.content.infrastructure.repository.jpa;
 
 import com.inmemory.content.domain.model.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;

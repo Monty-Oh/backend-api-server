@@ -1,7 +1,17 @@
 package com.inmemory.content.domain.repository;
 
-import com.inmemory.content.infrastructure.repository.AlbumCustomRepository;
-import com.inmemory.content.infrastructure.repository.AlbumJpaRepository;
+import com.inmemory.content.domain.model.aggregate.Album;
+import com.inmemory.content.domain.model.entity.Tag;
 
-public interface AlbumRepository extends AlbumJpaRepository, AlbumCustomRepository {
+import java.util.List;
+
+public interface AlbumRepository {
+
+    List<Album> findAll();
+
+    List<Album> findByTagList(List<Tag> tags);
+
+    Album save(Album album);
+
+    List<Album> saveAll(List<Album> albums);
 }
