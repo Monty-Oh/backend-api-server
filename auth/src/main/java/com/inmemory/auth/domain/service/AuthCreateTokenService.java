@@ -16,14 +16,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class AuthCreateTokenService {
 
@@ -102,9 +102,9 @@ public class AuthCreateTokenService {
     private List<String> getUserRoleList(String userNo) {
         List<UserRole> userRoleList = userRoleRepository.findByUserRoleIdUserNo(userNo);
         List<Integer> targetRoleIdList = userRoleList.stream()
-                .map(userRole -> userRole.getUserRoleId().getRoleId())
+                .map(userRole -> userRole.getRole().getId())
                 .toList();
-        List<Role> roleList = roleRepository.findByIdIn(targetRoleIdList);
+        List<Role> roleList = roleRepository.findAllByIdIn(targetRoleIdList);
         return roleList.stream()
                 .map(Role::getName)
                 .collect(Collectors.toList());

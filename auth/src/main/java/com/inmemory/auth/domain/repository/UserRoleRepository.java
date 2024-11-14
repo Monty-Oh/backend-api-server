@@ -10,4 +10,6 @@ public interface UserRoleRepository {
     List<UserRole> findByUserRoleIdUserNo(String userNo);
 
     UserRole save(UserRole userRole);
+
+    List<UserRole> saveAll(List<UserRole> userRoles);
 }

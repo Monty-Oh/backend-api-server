@@ -57,15 +57,16 @@ public class WireMockServerTest {
 
     /**
      * @param userNo    회원 번호
-     * @param roleId    RoleId
+     * @param role    저장하고자 하는 권한(Role)
      */
-    protected void insertUserRoleData(String userNo, int roleId) {
+    protected void insertUserRoleData(String userNo, Role role) {
         UserRoleId userRoleId = UserRoleId.builder()
                 .userNo(userNo)
-                .roleId(roleId)
+                .roleId(role.getId())
                 .build();
         UserRole userRole = UserRole.builder()
                 .userRoleId(userRoleId)
+                .role(role)
                 .build();
         userRoleRepository.save(userRole);
     }
