@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface RoleRepository {
 
-    List<Role> findByIdIn(List<Integer> ids);
+    List<Role> findAllByIdIn(List<Integer> ids);
 
     Role save(Role role);
+
+    List<Role> saveAll(List<Role> roles);
+
+    Role findById(int id);
 }

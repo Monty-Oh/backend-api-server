@@ -13,12 +13,13 @@ import org.springframework.test.context.TestPropertySource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.everyItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
 @TestPropertySource(locations = "classpath:application-test.yaml")
-@Import({QueryDslConfig.class})
+@Import({QueryDslConfig.class, TagRepositoryTestConfig.class})
 class TagRepositoryTest {
     @Autowired
     private TagRepository tagRepository;
@@ -43,6 +44,7 @@ class TagRepositoryTest {
 
         //  when
         assertAll(
+                () -> assertThat(tagList).allSatisfy(tag -> assertThat(tag.getTagId()).isNotNull()),
                 () -> assertThat(tagList).usingRecursiveComparison().isEqualTo(List.of(tag1, tag2))
         );
     }

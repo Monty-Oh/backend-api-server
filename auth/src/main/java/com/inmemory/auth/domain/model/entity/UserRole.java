@@ -1,8 +1,6 @@
 package com.inmemory.auth.domain.model.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,4 +15,9 @@ import lombok.NoArgsConstructor;
 public class UserRole {
     @EmbeddedId
     private UserRoleId userRoleId;
+
+    @ManyToOne
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

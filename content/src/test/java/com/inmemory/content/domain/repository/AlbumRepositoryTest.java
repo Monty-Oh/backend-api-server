@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @DataJpaTest
 @ActiveProfiles("test")
 @TestPropertySource(locations = "classpath:application-test.yaml")
-@Import({QueryDslConfig.class})
+@Import({QueryDslConfig.class, AlbumRepositoryTestConfig.class, TagRepositoryTestConfig.class})
 class AlbumRepositoryTest {
 
     @Autowired
@@ -29,7 +29,6 @@ class AlbumRepositoryTest {
 
     @Autowired
     private TagRepository tagRepository;
-
 
     @Test
     @DisplayName("선택된 태그 리스트로 앨범 리스트를 조회한다.")

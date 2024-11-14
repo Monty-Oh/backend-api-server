@@ -25,7 +25,7 @@ public class AuthCreateTokenControllerTest extends WireMockServerTest {
         //  given
         Role role = this.insertRoleData("testRole", "testRole");
         String userNo = "0000";
-        insertUserRoleData(userNo, role.getId());
+        insertUserRoleData(userNo, role);
         AuthCreateTokenReqDto authCreateTokenReqDto = AuthCreateTokenReqDto.builder()
                 .userNo(userNo)
                 .build();
