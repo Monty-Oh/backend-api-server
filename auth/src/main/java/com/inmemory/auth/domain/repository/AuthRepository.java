@@ -5,7 +5,7 @@ import com.inmemory.auth.domain.model.aggregate.Auth;
 import java.util.Optional;
 
 public interface AuthRepository {
-    Optional<Auth> findByUserNo(String userNo);
+    Optional<Auth> findById(String userNo);
 
     Auth save(Auth auth);
 }
