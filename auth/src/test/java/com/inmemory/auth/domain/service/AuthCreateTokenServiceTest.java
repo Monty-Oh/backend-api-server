@@ -94,7 +94,7 @@ class AuthCreateTokenServiceTest {
         assertAll(
                 () -> assertThat(actual.getAccessToken()).isEqualTo(accessToken),
                 () -> assertThat(actual.getRefreshToken()).isEqualTo(refreshToken),
-                () -> verify(authRepository, times(1)).findByUserNo(anyString())
+                () -> verify(authRepository, times(1)).findById(anyString())
         );
     }
 
