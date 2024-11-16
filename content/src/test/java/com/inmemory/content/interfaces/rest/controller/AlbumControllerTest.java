@@ -3,8 +3,8 @@ package com.inmemory.content.interfaces.rest.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inmemory.content.application.queryservice.AlbumListQueryService;
 import com.inmemory.content.domain.model.aggregate.Album;
-import com.inmemory.content.domain.model.dto.AlbumDto;
-import com.inmemory.content.domain.model.dto.AlbumListDto;
+import com.inmemory.content.domain.model.vo.AlbumListVo;
+import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.interfaces.rest.constants.ContentApiUrl;
 import com.inmemory.content.interfaces.rest.dto.AlbumListRspDto;
@@ -55,8 +55,8 @@ class AlbumControllerTest {
                 .contentId(0L)
                 .title("testTitle")
                 .build();
-        AlbumListDto albumListDto = new AlbumListDto(List.of(new AlbumDto(album)));
-        given(albumListQueryService.getAlbumList(any())).willReturn(albumListDto);
+        AlbumListVo albumListVo = new AlbumListVo(List.of(new AlbumVo(album)));
+        given(albumListQueryService.getAlbumList(any())).willReturn(albumListVo);
 
         AlbumListRspDto albumListRspDto = AlbumListRspDto.builder()
                 .albumList(List.of(

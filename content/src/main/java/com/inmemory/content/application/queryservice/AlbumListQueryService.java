@@ -1,7 +1,7 @@
 package com.inmemory.content.application.queryservice;
 
-import com.inmemory.content.domain.model.dto.AlbumDto;
-import com.inmemory.content.domain.model.dto.AlbumListDto;
+import com.inmemory.content.domain.model.vo.AlbumListVo;
+import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.entity.Tag;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.domain.service.AlbumFindService;
@@ -22,9 +22,9 @@ public class AlbumListQueryService {
      *
      * @return 컨텐츠 리스트
      */
-    public AlbumListDto getAlbumList(AlbumListQuery albumListQuery) {
+    public AlbumListVo getAlbumList(AlbumListQuery albumListQuery) {
         List<Tag> tagList = tagFindService.findTagList(albumListQuery.getTagNameList());
-        List<AlbumDto> albumDtoList = albumFindService.getAlbumList(tagList);
-        return new AlbumListDto(albumDtoList);
+        List<AlbumVo> albumVoList = albumFindService.getAlbumList(tagList);
+        return new AlbumListVo(albumVoList);
     }
 }

@@ -1,8 +1,7 @@
 package com.inmemory.content.interfaces.rest.controller;
 
 import com.inmemory.content.application.queryservice.AlbumListQueryService;
-import com.inmemory.content.domain.model.aggregate.Album;
-import com.inmemory.content.domain.model.dto.AlbumListDto;
+import com.inmemory.content.domain.model.vo.AlbumListVo;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.interfaces.rest.constants.ContentApiUrl;
 import com.inmemory.content.interfaces.rest.dto.AlbumListRspDto;
@@ -33,8 +32,8 @@ public class AlbumController {
     @GetMapping(ContentApiUrl.ALBUM_LIST)
     public ResponseEntity<AlbumListRspDto> getAlbumList(@RequestParam(value = "tag", required = false) List<String> tagList) {
         AlbumListQuery albumListQuery = albumListQueryMapper.mapToQuery(tagList);
-        AlbumListDto albumListDto = albumListQueryService.getAlbumList(albumListQuery);
-        AlbumListRspDto albumListRspDto = albumListQueryMapper.mapToRspDto(albumListDto);
+        AlbumListVo albumListVo = albumListQueryService.getAlbumList(albumListQuery);
+        AlbumListRspDto albumListRspDto = albumListQueryMapper.mapToRspDto(albumListVo);
         return new ResponseEntity<>(albumListRspDto, HttpStatus.OK);
     }
 }

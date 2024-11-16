@@ -1,8 +1,8 @@
 package com.inmemory.content.application.queryservice;
 
 import com.inmemory.content.domain.model.aggregate.Album;
-import com.inmemory.content.domain.model.dto.AlbumDto;
-import com.inmemory.content.domain.model.dto.AlbumListDto;
+import com.inmemory.content.domain.model.vo.AlbumVo;
+import com.inmemory.content.domain.model.vo.AlbumListVo;
 import com.inmemory.content.domain.model.entity.Tag;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.domain.service.AlbumFindService;
@@ -42,17 +42,17 @@ class AlbumListQueryServiceTest {
         given(tagFindService.findTagList(anyList())).willReturn(List.of(tag));
 
         Album album = Album.builder().contentId(0L).build();
-        List<AlbumDto> albumDtoList = List.of(new AlbumDto(album));
-        given(albumFindService.getAlbumList(anyList())).willReturn(albumDtoList);
+        List<AlbumVo> albumVoList = List.of(new AlbumVo(album));
+        given(albumFindService.getAlbumList(anyList())).willReturn(albumVoList);
 
         AlbumListQuery albumListQuery = AlbumListQuery.builder().tagNameList(List.of(tagName)).build();
 
         //  when
-        AlbumListDto actual = albumListQueryService.getAlbumList(albumListQuery);
+        AlbumListVo actual = albumListQueryService.getAlbumList(albumListQuery);
 
         //  then
         assertAll(
-                () -> assertThat(actual.albumDtoList().get(0).contentId()).isEqualTo(album.getContentId())
+                () -> assertThat(actual.albumVoList().get(0).contentId()).isEqualTo(album.getContentId())
         );
     }
 
