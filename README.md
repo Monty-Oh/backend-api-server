@@ -1,11 +1,11 @@
-# 토이프로젝트 #1
-In-Memory 프로젝트
+# Backend API Server 
+개인 프로젝트에 쓰이는 Backend 서버  
 
 ---
 ## Getting Started
 깃허브 URL: https://github.com/Monty-Oh/inmemory  
 HTTPS clone URL: https://github.com/Monty-Oh/inmemory.git  
-Miro URL: https://miro.com/app/board/uXjVMqdk8fg=/?share_link_id=201338916303
+깃허브 프로젝트 URL: https://github.com/users/Monty-Oh/projects/4
 
 ---
 ## Local 개발 환경 구성
