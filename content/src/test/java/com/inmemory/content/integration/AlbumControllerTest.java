@@ -70,7 +70,7 @@ public class AlbumControllerTest extends WireMockServerTest {
         assertAll(
                 () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK),
                 () -> assertNotNull(actual),
-                () -> assertThat(actual.getAlbumList()).usingRecursiveComparison().isEqualTo(albums)
+                () -> assertThat(actual.albumList()).usingRecursiveComparison().isEqualTo(albums)
         );
     }
 
@@ -135,7 +135,7 @@ public class AlbumControllerTest extends WireMockServerTest {
         assertAll(
                 () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK),
                 () -> assertNotNull(actual),
-                () -> assertThat(actual.getAlbumList()).usingRecursiveComparison().isEqualTo(albums)
+                () -> assertThat(actual.albumList()).usingRecursiveComparison().isEqualTo(albums)
         );
     }
 
@@ -166,7 +166,7 @@ public class AlbumControllerTest extends WireMockServerTest {
         assertAll(
                 () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK),
                 () -> assertNotNull(actual),
-                () -> assertThat(actual.getAlbumList().size()).isEqualTo(0)
+                () -> assertThat(actual.albumList().size()).isEqualTo(0)
         );
     }
 }

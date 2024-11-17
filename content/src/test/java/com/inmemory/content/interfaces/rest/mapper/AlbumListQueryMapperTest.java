@@ -44,8 +44,8 @@ class AlbumListQueryMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAlbumList().size()).isEqualTo(1),
-                () -> assertThat(actual.getAlbumList().get(0).getTitle()).isEqualTo(album.getTitle())
+                () -> assertThat(actual.albumList().size()).isEqualTo(1),
+                () -> assertThat(actual.albumList().get(0).title()).isEqualTo(album.getTitle())
         );
     }
 }
