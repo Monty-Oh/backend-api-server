@@ -1,8 +1,8 @@
 package com.inmemory.content.interfaces.rest.mapper;
 
 import com.inmemory.content.domain.model.aggregate.Album;
-import com.inmemory.content.domain.model.dto.AlbumDto;
-import com.inmemory.content.domain.model.dto.AlbumListDto;
+import com.inmemory.content.domain.model.vo.AlbumListVo;
+import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.interfaces.rest.dto.AlbumListRspDto;
 import org.junit.jupiter.api.Test;
@@ -37,15 +37,15 @@ class AlbumListQueryMapperTest {
         Album album = Album.builder()
                 .contentId(0L)
                 .title("testAlbum").build();
-        AlbumListDto albumListDto = new AlbumListDto(List.of(new AlbumDto(album)));
+        AlbumListVo albumListVo = new AlbumListVo(List.of(new AlbumVo(album)));
 
         //  when
-        AlbumListRspDto actual = albumListQueryMapper.mapToRspDto(albumListDto);
+        AlbumListRspDto actual = albumListQueryMapper.mapToRspDto(albumListVo);
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAlbumList().size()).isEqualTo(1),
-                () -> assertThat(actual.getAlbumList().get(0).getTitle()).isEqualTo(album.getTitle())
+                () -> assertThat(actual.albumList().size()).isEqualTo(1),
+                () -> assertThat(actual.albumList().get(0).title()).isEqualTo(album.getTitle())
         );
     }
 }

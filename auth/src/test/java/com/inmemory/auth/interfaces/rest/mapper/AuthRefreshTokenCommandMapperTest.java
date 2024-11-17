@@ -40,8 +40,8 @@ class AuthRefreshTokenCommandMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authRefreshTokenVo.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authRefreshTokenVo.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authRefreshTokenVo.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authRefreshTokenVo.refreshToken())
         );
     }
 }

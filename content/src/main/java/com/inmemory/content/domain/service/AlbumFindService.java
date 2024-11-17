@@ -1,7 +1,7 @@
 package com.inmemory.content.domain.service;
 
 import com.inmemory.content.domain.model.aggregate.Album;
-import com.inmemory.content.domain.model.dto.AlbumDto;
+import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.entity.Tag;
 import com.inmemory.content.domain.repository.AlbumRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ public class AlbumFindService {
      *
      * @return 컨텐츠 리스트
      */
-    public List<AlbumDto> getAlbumList(List<Tag> tagList) {
+    public List<AlbumVo> getAlbumList(List<Tag> tagList) {
         List<Album> albumList = tagList.isEmpty()
                 ? albumRepository.findAll()
                 : albumRepository.findByTagList(tagList);
         return albumList.stream()
-                .map(AlbumDto::new)
+                .map(AlbumVo::new)
                 .toList();
     }
 }

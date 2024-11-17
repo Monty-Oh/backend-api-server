@@ -51,7 +51,7 @@ public class AuthCreateTokenService {
                 .accessToken(jwtUtils.createAccessToken(userNo, userRoleList))
                 .refreshToken(jwtUtils.createRefreshToken(userNo))
                 .build();
-        this.saveRefreshToken(userNo, authCreateTokenVo.getRefreshToken());
+        this.saveRefreshToken(userNo, authCreateTokenVo.refreshToken());
 
         return authCreateTokenVo;
     }
@@ -73,7 +73,7 @@ public class AuthCreateTokenService {
                 .accessToken(jwtUtils.createAccessToken(userNo, userRoleList))
                 .refreshToken(jwtUtils.createRefreshToken(userNo, expirationDate))
                 .build();
-        this.saveRefreshToken(userNo, authRefreshTokenVo.getRefreshToken());
+        this.saveRefreshToken(userNo, authRefreshTokenVo.refreshToken());
 
         return authRefreshTokenVo;
     }

@@ -42,8 +42,8 @@ class AuthRepositoryImplTest {
                 .build();
         given(authFeignClient.createAccessTokenAndRefreshToken(any())).willReturn(ResponseEntity.of(Optional.of(authCreateTokenRspDto)));
         AuthCreateTokenVo authCreateTokenVo = AuthCreateTokenVo.builder()
-                .accessToken(authCreateTokenRspDto.getAccessToken())
-                .refreshToken(authCreateTokenRspDto.getRefreshToken())
+                .accessToken(authCreateTokenRspDto.accessToken())
+                .refreshToken(authCreateTokenRspDto.refreshToken())
                 .build();
         given(authCreateTokenMapper.mapToVo(any())).willReturn(authCreateTokenVo);
         String userId = "testUserId";
@@ -53,8 +53,8 @@ class AuthRepositoryImplTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authCreateTokenVo.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authCreateTokenVo.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authCreateTokenVo.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authCreateTokenVo.refreshToken())
         );
     }
 

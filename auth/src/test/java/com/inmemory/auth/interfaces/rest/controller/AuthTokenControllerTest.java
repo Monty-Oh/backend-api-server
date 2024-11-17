@@ -52,7 +52,7 @@ class AuthTokenControllerTest {
                 .userNo("testUserNo")
                 .build();
         AuthCreateTokenCommand authCreateTokenCommand = AuthCreateTokenCommand.builder()
-                .userNo(authCreateTokenReqDto.getUserNo())
+                .userNo(authCreateTokenReqDto.userNo())
                 .build();
         given(authCreateTokenCommandMapper.mapToCommand(any())).willReturn(authCreateTokenCommand);
 
@@ -63,8 +63,8 @@ class AuthTokenControllerTest {
         given(authTokenCommandService.createToken(any())).willReturn(authCreateTokenVo);
 
         AuthCreateTokenRspDto authCreateTokenRspDto = AuthCreateTokenRspDto.builder()
-                .accessToken(authCreateTokenVo.getAccessToken())
-                .refreshToken(authCreateTokenVo.getRefreshToken())
+                .accessToken(authCreateTokenVo.accessToken())
+                .refreshToken(authCreateTokenVo.refreshToken())
                 .build();
         given(authCreateTokenCommandMapper.mapToRspDto(any())).willReturn(authCreateTokenRspDto);
 

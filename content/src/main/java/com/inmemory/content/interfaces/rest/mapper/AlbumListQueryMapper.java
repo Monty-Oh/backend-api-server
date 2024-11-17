@@ -1,7 +1,7 @@
 package com.inmemory.content.interfaces.rest.mapper;
 
 import com.inmemory.content.common.configuration.MapStructConfig;
-import com.inmemory.content.domain.model.dto.AlbumListDto;
+import com.inmemory.content.domain.model.vo.AlbumListVo;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
 import com.inmemory.content.interfaces.rest.dto.AlbumListRspDto;
 import org.mapstruct.Mapper;
@@ -30,9 +30,9 @@ public abstract class AlbumListQueryMapper {
     /**
      * 조회 결과를 응답용 ResponseDto 로 변환
      *
-     * @param albumListDto 조회 결과
+     * @param albumListVo 조회 결과
      * @return 응답 객체
      */
-    @Mapping(target = "albumList", source = "albumDtoList")
-    public abstract AlbumListRspDto mapToRspDto(AlbumListDto albumListDto);
+    @Mapping(target = "albumList", source = "albumVoList")
+    public abstract AlbumListRspDto mapToRspDto(AlbumListVo albumListVo);
 }

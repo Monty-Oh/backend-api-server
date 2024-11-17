@@ -45,8 +45,8 @@ class UserControllerTest {
                 .password("testPassword")
                 .build();
         UserLoginCommand userLoginCommand = UserLoginCommand.builder()
-                .loginId(userLoginReqDto.getLoginId())
-                .password(userLoginReqDto.getPassword())
+                .loginId(userLoginReqDto.loginId())
+                .password(userLoginReqDto.password())
                 .build();
         given(userLoginCommandMapper.mapToCommand(any())).willReturn(userLoginCommand);
         AuthCreateTokenVo authCreateTokenVo = AuthCreateTokenVo.builder()
@@ -55,8 +55,8 @@ class UserControllerTest {
                 .build();
         given(userLoginCommandService.login(any())).willReturn(authCreateTokenVo);
         UserLoginRspDto userLoginRspDto = UserLoginRspDto.builder()
-                .accessToken(authCreateTokenVo.getAccessToken())
-                .refreshToken(authCreateTokenVo.getRefreshToken())
+                .accessToken(authCreateTokenVo.accessToken())
+                .refreshToken(authCreateTokenVo.refreshToken())
                 .build();
         given(userLoginCommandMapper.mapToRspDto(any())).willReturn(userLoginRspDto);
 

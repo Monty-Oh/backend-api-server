@@ -26,8 +26,8 @@ class UserLoginCommandMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(userLoginCommand.getLoginId()).isEqualTo(userLoginReqDto.getLoginId()),
-                () -> assertThat(userLoginCommand.getPassword()).isEqualTo(userLoginReqDto.getPassword())
+                () -> assertThat(userLoginCommand.getLoginId()).isEqualTo(userLoginReqDto.loginId()),
+                () -> assertThat(userLoginCommand.getPassword()).isEqualTo(userLoginReqDto.password())
         );
     }
 
@@ -44,8 +44,8 @@ class UserLoginCommandMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(userLoginRspDto.getAccessToken()).isEqualTo(authCreateTokenVo.getAccessToken()),
-                () -> assertThat(userLoginRspDto.getRefreshToken()).isEqualTo(authCreateTokenVo.getRefreshToken())
+                () -> assertThat(userLoginRspDto.accessToken()).isEqualTo(authCreateTokenVo.accessToken()),
+                () -> assertThat(userLoginRspDto.refreshToken()).isEqualTo(authCreateTokenVo.refreshToken())
         );
     }
 }

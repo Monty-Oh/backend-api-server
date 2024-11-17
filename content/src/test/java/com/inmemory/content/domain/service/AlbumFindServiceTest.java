@@ -1,7 +1,7 @@
 package com.inmemory.content.domain.service;
 
 import com.inmemory.content.domain.model.aggregate.Album;
-import com.inmemory.content.domain.model.dto.AlbumDto;
+import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.entity.Tag;
 import com.inmemory.content.domain.repository.AlbumRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -43,7 +43,7 @@ class AlbumFindServiceTest {
         given(albumRepository.findByTagList(anyList())).willReturn(albumList);
 
         //  when
-        List<AlbumDto> actual = albumFindService.getAlbumList(tagList);
+        List<AlbumVo> actual = albumFindService.getAlbumList(tagList);
 
         //  then
         assertAll(
@@ -63,7 +63,7 @@ class AlbumFindServiceTest {
         given(albumRepository.findAll()).willReturn(albumList);
 
         //  when
-        List<AlbumDto> actual = albumFindService.getAlbumList(tagList);
+        List<AlbumVo> actual = albumFindService.getAlbumList(tagList);
 
         //  then
         assertAll(

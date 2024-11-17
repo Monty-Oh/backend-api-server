@@ -92,8 +92,8 @@ class AuthCreateTokenServiceTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(accessToken),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(refreshToken),
+                () -> assertThat(actual.accessToken()).isEqualTo(accessToken),
+                () -> assertThat(actual.refreshToken()).isEqualTo(refreshToken),
                 () -> verify(authRepository, times(1)).findById(anyString())
         );
     }
@@ -161,8 +161,8 @@ class AuthCreateTokenServiceTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(accessToken),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(refreshToken)
+                () -> assertThat(actual.accessToken()).isEqualTo(accessToken),
+                () -> assertThat(actual.refreshToken()).isEqualTo(refreshToken)
         );
     }
 }

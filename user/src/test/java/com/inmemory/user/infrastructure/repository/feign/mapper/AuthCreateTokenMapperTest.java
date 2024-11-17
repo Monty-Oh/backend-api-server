@@ -22,7 +22,7 @@ class AuthCreateTokenMapperTest {
         AuthCreateTokenReqDto actual = mapper.mapToReqDto(userNo);
 
         //  then
-        assertThat(actual.getUserNo()).isEqualTo(userNo);
+        assertThat(actual.userNo()).isEqualTo(userNo);
     }
 
     @Test
@@ -38,8 +38,8 @@ class AuthCreateTokenMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authCreateTokenRspDto.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authCreateTokenRspDto.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authCreateTokenRspDto.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authCreateTokenRspDto.refreshToken())
         );
     }
 }
