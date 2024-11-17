@@ -86,7 +86,7 @@ public class AuthCreateTokenService {
      */
     private void saveRefreshToken(String userNo, String refreshToken) {
         Auth auth = authRepository
-                .findByUserNo(userNo)
+                .findById(userNo)
                 .orElse(new Auth(userNo, Duration.ofMinutes(refreshKeyTtl)))
                 ;
         auth.changeRefreshToken(refreshToken);
