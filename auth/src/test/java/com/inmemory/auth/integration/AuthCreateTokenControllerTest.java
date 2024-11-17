@@ -39,8 +39,8 @@ public class AuthCreateTokenControllerTest extends WireMockServerTest {
         //  then
         assertAll(
                 () -> assertThat(actual.isPresent()).isTrue(),
-                () -> assertTrue(actual.map(AuthCreateTokenRspDto::getAccessToken).isPresent()),
-                () -> assertTrue(actual.map(AuthCreateTokenRspDto::getRefreshToken).isPresent())
+                () -> assertTrue(actual.map(AuthCreateTokenRspDto::accessToken).isPresent()),
+                () -> assertTrue(actual.map(AuthCreateTokenRspDto::refreshToken).isPresent())
         );
     }
 

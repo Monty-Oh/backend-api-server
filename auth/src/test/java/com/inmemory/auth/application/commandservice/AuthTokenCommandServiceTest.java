@@ -45,8 +45,8 @@ class AuthTokenCommandServiceTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authCreateTokenVo.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authCreateTokenVo.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authCreateTokenVo.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authCreateTokenVo.refreshToken())
         );
     }
 
@@ -68,8 +68,8 @@ class AuthTokenCommandServiceTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authRefreshTokenVo.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authRefreshTokenVo.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authRefreshTokenVo.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authRefreshTokenVo.refreshToken())
         );
     }
 }

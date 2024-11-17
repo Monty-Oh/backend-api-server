@@ -25,7 +25,7 @@ class AuthCreateTokenCommandMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getUserNo()).isEqualTo(authCreateTokenReqDto.getUserNo())
+                () -> assertThat(actual.getUserNo()).isEqualTo(authCreateTokenReqDto.userNo())
         );
     }
 
@@ -42,8 +42,8 @@ class AuthCreateTokenCommandMapperTest {
 
         //  then
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authCreateTokenVo.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authCreateTokenVo.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authCreateTokenVo.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authCreateTokenVo.refreshToken())
         );
     }
 }
