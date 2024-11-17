@@ -39,8 +39,8 @@ public class UserControllerTest extends WireMockServerTest {
         assertAll(
                 () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK),
                 () -> assertTrue(actual.isPresent()),
-                () -> assertTrue(actual.map(UserLoginRspDto::getAccessToken).isPresent()),
-                () -> assertTrue(actual.map(UserLoginRspDto::getRefreshToken).isPresent())
+                () -> assertTrue(actual.map(UserLoginRspDto::accessToken).isPresent()),
+                () -> assertTrue(actual.map(UserLoginRspDto::refreshToken).isPresent())
         );
     }
 

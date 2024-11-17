@@ -40,8 +40,8 @@ class AuthFeignClientTest extends WireMockTest {
         assertNotNull(responseEntity.getBody());
         AuthCreateTokenRspDto actual = responseEntity.getBody();
         assertAll(
-                () -> assertThat(actual.getAccessToken()).isEqualTo(authCreateTokenRspDto.getAccessToken()),
-                () -> assertThat(actual.getRefreshToken()).isEqualTo(authCreateTokenRspDto.getRefreshToken())
+                () -> assertThat(actual.accessToken()).isEqualTo(authCreateTokenRspDto.accessToken()),
+                () -> assertThat(actual.refreshToken()).isEqualTo(authCreateTokenRspDto.refreshToken())
         );
     }
 
