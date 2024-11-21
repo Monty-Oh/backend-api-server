@@ -3,6 +3,8 @@ spring:
   config:
     activate:
       on-profile: local
+  mvc:
+    static-path-pattern: /content/v1/public/**
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:23306/content

@@ -1,6 +1,8 @@
 package com.inmemory.gateway.config;
 
 import com.inmemory.gateway.common.constant.StaticValues;
+import com.inmemory.gateway.common.property.WhiteListProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,7 +13,9 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class SpringSecurityAuthenticationConverter implements ServerAuthenticationConverter {
+    private final WhiteListProperties whiteListProperties;
 
     /**
      * 스프링 시큐리티에 필요한 인증 데이터를 가져온다.
@@ -20,11 +24,18 @@ public class SpringSecurityAuthenticationConverter implements ServerAuthenticati
      */
     @Override
     public Mono<Authentication> convert(ServerWebExchange exchange) {
+        String requestPath = exchange.getRequest().getURI().getPath();
+
+        if (whiteListProperties.isWhiteList(requestPath)) {
+            return Mono.empty();
+        }
+
         String accessToken = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (StringUtils.hasText(accessToken) && accessToken.startsWith(StaticValues.ACCESS_TOKEN_START_WITH_STRING)) {
             accessToken = accessToken.replace(StaticValues.ACCESS_TOKEN_START_WITH_STRING, StaticValues.EMPTY_STRING);
             return Mono.just(new UsernamePasswordAuthenticationToken(accessToken, accessToken));
         }
+
         return Mono.empty();
     }
 }

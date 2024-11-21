@@ -3,6 +3,7 @@ package com.inmemory.content.interfaces.rest.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inmemory.content.application.queryservice.AlbumListQueryService;
 import com.inmemory.content.domain.model.aggregate.Album;
+import com.inmemory.content.domain.model.entity.Tag;
 import com.inmemory.content.domain.model.vo.AlbumListVo;
 import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
@@ -19,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -51,9 +53,14 @@ class AlbumControllerTest {
                 .build();
         given(albumListQueryMapper.mapToQuery(anyList())).willReturn(albumListQuery);
 
+        Tag tag = Tag.builder()
+                .tagName("testTag")
+                .tagId(0L)
+                .build();
         Album album = Album.builder()
                 .contentId(0L)
                 .title("testTitle")
+                .tags(new HashSet<>(List.of(tag)))
                 .build();
         AlbumListVo albumListVo = new AlbumListVo(List.of(new AlbumVo(album)));
         given(albumListQueryService.getAlbumList(any())).willReturn(albumListVo);

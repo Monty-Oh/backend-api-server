@@ -1,6 +1,6 @@
 package com.inmemory.gateway.config;
 
-import com.inmemory.gateway.common.constant.UserRole;
+import com.inmemory.gateway.common.property.WhiteListProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +16,8 @@ import org.springframework.security.web.server.authentication.AuthenticationWebF
 public class SpringSecurityConfig {
     private final SpringSecurityAuthenticationConverter springSecurityAuthenticationConverter;
     private final SpringSecurityAuthenticationManager springSecurityAuthenticationManager;
+
+    private final WhiteListProperties whiteListProperties;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity serverHttpSecurity) {
@@ -38,16 +40,7 @@ public class SpringSecurityConfig {
         serverHttpSecurity
                 .authorizeExchange(
                         exchange -> exchange
-                                .pathMatchers(
-                                        "/user/monitor/healthcheck",
-                                        "/swagger-ui",
-                                        "/user/v1/users/login",
-                                        "/auth/v1/token"
-                                ).permitAll()
-//                                .pathMatchers(
-
-//                                ).hasRole(UserRole.ROLE_MASTER.getName())
-//                                .anyExchange().hasRole(UserRole.ROLE_GUEST.getName())
+                                .pathMatchers(whiteListProperties.toArray()).permitAll()
                                 .anyExchange().authenticated()
                 )
         ;

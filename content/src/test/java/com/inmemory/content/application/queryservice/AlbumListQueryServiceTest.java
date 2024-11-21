@@ -14,7 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,10 +40,16 @@ class AlbumListQueryServiceTest {
     void getAlbumList() {
         //  given
         String tagName = "testTag";
-        Tag tag = Tag.builder().tagName(tagName).build();
+        Tag tag = Tag.builder()
+                .tagId(0L)
+                .tagName(tagName)
+                .build();
         given(tagFindService.findTagList(anyList())).willReturn(List.of(tag));
 
-        Album album = Album.builder().contentId(0L).build();
+        Set<Tag> tags = new HashSet<>(){{
+            add(tag);
+        }};
+        Album album = Album.builder().contentId(0L).tags(tags).build();
         List<AlbumVo> albumVoList = List.of(new AlbumVo(album));
         given(albumFindService.getAlbumList(anyList())).willReturn(albumVoList);
 

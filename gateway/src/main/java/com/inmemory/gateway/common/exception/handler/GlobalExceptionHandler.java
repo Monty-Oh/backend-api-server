@@ -11,6 +11,9 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebExceptionHandler;
 import reactor.core.publisher.Mono;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import static com.inmemory.gateway.common.constant.ErrorCode.INTERNAL_SERVER_ERROR;
 import static com.inmemory.gateway.common.constant.StaticValues.HEADER_RESPONSE_CODE;
 import static com.inmemory.gateway.common.constant.StaticValues.HEADER_RESPONSE_MESSAGE;
@@ -28,11 +31,11 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
 
         if (ex instanceof ApplicationException applicationException) {
             serverHttpResponseHeaders.add(HEADER_RESPONSE_CODE, applicationException.getErrorCode());
-            serverHttpResponseHeaders.add(HEADER_RESPONSE_MESSAGE, applicationException.getMessage());
+            serverHttpResponseHeaders.add(HEADER_RESPONSE_MESSAGE, URLEncoder.encode(applicationException.getMessage(), StandardCharsets.UTF_8));
             serverHttpResponse.setStatusCode(applicationException.getHttpStatus());
         } else {
             serverHttpResponseHeaders.add(HEADER_RESPONSE_CODE, INTERNAL_SERVER_ERROR.getCode());
-            serverHttpResponseHeaders.add(HEADER_RESPONSE_MESSAGE, INTERNAL_SERVER_ERROR.getMessage());
+            serverHttpResponseHeaders.add(HEADER_RESPONSE_MESSAGE, URLEncoder.encode(INTERNAL_SERVER_ERROR.getMessage(), StandardCharsets.UTF_8));
             serverHttpResponse.setStatusCode(INTERNAL_SERVER_ERROR.getHttpStatus());
         }
 
