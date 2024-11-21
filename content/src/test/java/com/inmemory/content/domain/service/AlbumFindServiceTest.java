@@ -12,7 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -37,17 +39,20 @@ class AlbumFindServiceTest {
             add(Tag.builder().tagId(1L).tagName("tag2").build());
         }};
         List<Album> albumList = new ArrayList<>() {{
-            add(Album.builder().contentId(0L).build());
-            add(Album.builder().contentId(1L).build());
+            add(Album.builder().contentId(0L).tags(new HashSet<>(tagList)).build());
+            add(Album.builder().contentId(1L).tags(new HashSet<>(tagList)).build());
         }};
         given(albumRepository.findByTagList(anyList())).willReturn(albumList);
+        List<AlbumVo> albumVoList = albumList.stream()
+                .map(AlbumVo::new)
+                .toList();
 
         //  when
         List<AlbumVo> actual = albumFindService.getAlbumList(tagList);
 
         //  then
         assertAll(
-                () -> assertThat(actual).usingRecursiveComparison().isEqualTo(albumList)
+                () -> assertThat(actual).usingRecursiveComparison().isEqualTo(albumVoList)
         );
     }
 
@@ -57,17 +62,21 @@ class AlbumFindServiceTest {
         //  given
         List<Tag> tagList = new ArrayList<>();
         List<Album> albumList = new ArrayList<>() {{
-            add(Album.builder().contentId(0L).build());
-            add(Album.builder().contentId(1L).build());
+            add(Album.builder().contentId(0L).tags(new HashSet<>(tagList)).build());
+            add(Album.builder().contentId(1L).tags(new HashSet<>(tagList)).build());
         }};
         given(albumRepository.findAll()).willReturn(albumList);
+        List<AlbumVo> albumVoList = albumList.stream()
+                .map(AlbumVo::new)
+                .toList();
+
 
         //  when
         List<AlbumVo> actual = albumFindService.getAlbumList(tagList);
 
         //  then
         assertAll(
-                () -> assertThat(actual).usingRecursiveComparison().isEqualTo(albumList)
+                () -> assertThat(actual).usingRecursiveComparison().isEqualTo(albumVoList)
         );
     }
 }

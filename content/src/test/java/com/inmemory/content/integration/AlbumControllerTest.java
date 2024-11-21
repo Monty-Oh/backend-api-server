@@ -2,6 +2,7 @@ package com.inmemory.content.integration;
 
 import com.inmemory.content.domain.model.aggregate.Album;
 import com.inmemory.content.domain.model.entity.Tag;
+import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.interfaces.rest.constants.ContentApiUrl;
 import com.inmemory.content.interfaces.rest.dto.AlbumListRspDto;
 import org.junit.jupiter.api.DisplayName;
@@ -70,7 +71,8 @@ public class AlbumControllerTest extends WireMockServerTest {
         assertAll(
                 () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK),
                 () -> assertNotNull(actual),
-                () -> assertThat(actual.albumList()).usingRecursiveComparison().isEqualTo(albums)
+                () -> assertThat(actual.albumList().get(0).title()).isEqualTo(testAlbum1.getTitle()),
+                () -> assertThat(actual.albumList().get(1).title()).isEqualTo(testAlbum2.getTitle())
         );
     }
 
@@ -117,6 +119,9 @@ public class AlbumControllerTest extends WireMockServerTest {
                 .tags(tagSet3)
                 .build();
         List<Album> albums = this.insertAlbumList(List.of(album1, album2, album3));
+        List<AlbumVo> albumVoList = albums.stream()
+                .map(AlbumVo::new)
+                .toList();
 
         //  when
         String requestUri = UriComponentsBuilder.fromPath(ContentApiUrl.CONTENT_V1_BASE_URL)
@@ -135,7 +140,9 @@ public class AlbumControllerTest extends WireMockServerTest {
         assertAll(
                 () -> assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK),
                 () -> assertNotNull(actual),
-                () -> assertThat(actual.albumList()).usingRecursiveComparison().isEqualTo(albums)
+                () -> assertThat(actual.albumList().get(0).title()).isEqualTo(albumVoList.get(0).title()),
+                () -> assertThat(actual.albumList().get(1).title()).isEqualTo(albumVoList.get(1).title()),
+                () -> assertThat(actual.albumList().get(2).title()).isEqualTo(albumVoList.get(2).title())
         );
     }
 

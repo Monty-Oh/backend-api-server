@@ -3,3 +3,5 @@ whitelist:
     - "/swagger-ui"
     - "/user/v1/users/login"
     - "/user/monitor/healthcheck"
+    - "/content/v1/public/**"
+    - "/auth/v1/token"

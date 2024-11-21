@@ -1,6 +1,7 @@
 package com.inmemory.content.interfaces.rest.mapper;
 
 import com.inmemory.content.domain.model.aggregate.Album;
+import com.inmemory.content.domain.model.entity.Tag;
 import com.inmemory.content.domain.model.vo.AlbumListVo;
 import com.inmemory.content.domain.model.vo.AlbumVo;
 import com.inmemory.content.domain.model.query.AlbumListQuery;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -34,8 +36,13 @@ class AlbumListQueryMapperTest {
     @Test
     void mapToRspDto() {
         //  given
+        Tag tag = Tag.builder()
+                .tagId(0L)
+                .tagName("testTag")
+                .build();
         Album album = Album.builder()
                 .contentId(0L)
+                .tags(Set.of(tag))
                 .title("testAlbum").build();
         AlbumListVo albumListVo = new AlbumListVo(List.of(new AlbumVo(album)));
 

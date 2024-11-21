@@ -23,4 +23,12 @@ public class WhiteListProperties {
     public boolean isWhiteList(String url) {
         return urls.contains(url);
     }
+
+    /**
+     * List<String> 타입의 데이터를 배열 타입으로 반환한다.
+     * @return String 타입의 배열
+     */
+    public String[] toArray() {
+        return urls.toArray(new String[0]);
+    }
 }
