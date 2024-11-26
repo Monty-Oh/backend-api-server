@@ -6,7 +6,7 @@ on:
       - develop
 
 jobs:
-  build_modules:
+  pull_request_develop_build_modules:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
