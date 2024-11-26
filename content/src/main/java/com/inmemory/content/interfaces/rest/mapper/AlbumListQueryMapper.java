@@ -41,10 +41,10 @@ public abstract class AlbumListQueryMapper {
     public abstract AlbumListRspDto mapToRspDto(AlbumListVo albumListVo);
 
     @Named(value = "AlbumListRspDto.albumList")
-    @Mapping(target = "tagNameList", source = "tagVoList", qualifiedByName = "AlbumListRspDto.albumList.tagNameList")
+    @Mapping(target = "tagList", source = "tagVoList", qualifiedByName = "AlbumListRspDto.albumList.tagList")
     protected abstract AlbumListRspDtoItem mapToRspDto(AlbumVo albumVo);
 
-    @Named(value = "AlbumListRspDto.albumList.tagNameList")
+    @Named(value = "AlbumListRspDto.albumList.tagList")
     protected List<String> mapToRspDto(List<TagVo> tagVoList) {
         return tagVoList.stream().map(TagVo::tagName).toList();
     }
