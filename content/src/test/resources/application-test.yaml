@@ -1,0 +1,14 @@
+# test 용 Spring Profile
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: "jdbc:h2:mem:./data/localdb;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO;TIME ZONE=Asia/Seoul"
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

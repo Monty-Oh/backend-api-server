@@ -1,0 +1,21 @@
+# local 용 Spring Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+  mvc:
+    static-path-pattern: /content/v1/public/**
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:23306/content
+    username: content
+    password: welcome
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  flyway:
+    enabled: true
+    validate-migration-naming: true
+server:
+  port: 8082

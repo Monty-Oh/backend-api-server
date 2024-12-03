@@ -20,3 +20,18 @@ services:
       - --character-set-client-handshake=0
       - --slow-query-log=ON
       - --long-query-time=2
+
+  auth_local_redis:
+    platform: linux/x86_64
+    image: redis:7.2.4-alpine3.19
+    hostname: auth_local_redis
+    container_name: auth_local_redis
+    restart: always
+    ports:
+      - "16379:6379"
+    networks:
+      - inmemory-redis-network
+
+networks:
+  inmemory-redis-network:
+    driver: bridge
